@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ujian Terjaga: Guru</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F3F6FA;--sf:#fff;--ink:#0F1B2D;--mu:#5B6B80;--ac:#1F4FFF;--acx:#fff;--dg:#C62828;--ok:#1B7F5C;--wn:#B26A00;--ln:#D5DDE8;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1320;--sf:#131D2E;--ink:#E8EEF7;--mu:#93A3B8;--ac:#7FA0FF;--acx:#0C1320;--dg:#FF7A7A;--ok:#5FD1A0;--wn:#F0B45A;--ln:#263449;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Public Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;line-height:1.15;margin:0}
+h1{font-size:clamp(28px,6vw,44px);font-weight:700;letter-spacing:-.02em}
+h2{font-size:22px}h3{font-size:17px}
+main{max-width:900px;margin:0 auto;padding:20px 16px 64px}
+p{margin:.4em 0}.mu{color:var(--mu)}.hide{display:none!important}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--ln);margin:18px 0}
+.tab{background:none;border:0;border-bottom:3px solid transparent;border-radius:0;color:var(--mu);font:600 16px "Public Sans",sans-serif;padding:10px 16px;cursor:pointer}
+.tab[aria-selected=true]{color:var(--ink);border-color:var(--ac)}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:18px;margin:14px 0}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--ln);border-radius:6px;padding:9px 11px}
+textarea{resize:vertical;min-height:70px}
+.row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1 1 150px}
+.opt{display:flex;gap:8px;align-items:center;margin:6px 0}.opt input[type=radio],.opt input[type=checkbox]{width:auto}
+button{font:600 15px "Public Sans",sans-serif;cursor:pointer;border-radius:6px;padding:9px 15px;border:1px solid var(--ln);background:var(--sf);color:var(--ink)}
+button.p{background:var(--ac);color:var(--acx);border-color:var(--ac)}
+button.d{color:var(--dg)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.note{border-left:4px solid var(--ac);background:var(--sf);padding:10px 14px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--ln);vertical-align:top}
+.scroll{overflow-x:auto}
+.tg{font-style:normal;font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:99px;border:1px solid currentColor;white-space:nowrap;display:inline-block}
+.s-dr{color:var(--mu)}.s-tj{color:var(--wn)}.s-bl{color:var(--ok)}.s-sl{color:var(--mu)}.tg.g{color:var(--ok)}.tg.x{color:var(--dg)}
+.ex{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.ex .inf{flex:1 1 240px}
+.ex b{font:700 18px "Bricolage Grotesque",sans-serif}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.stats div{flex:1 1 110px;border:1px solid var(--ln);border-radius:8px;padding:10px 12px;background:var(--bg)}.stats b{display:block;font:700 26px "Bricolage Grotesque",sans-serif}.stats span{color:var(--mu);font-size:13px}
+details.st{padding:0}details.st>summary{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+details.st>:not(summary){margin-left:18px;margin-right:18px}details.st[open]{padding-bottom:16px}
+.nm{flex:1 1 auto;font:700 18px "Bricolage Grotesque",sans-serif}
+.qb{border:1px solid var(--ln);border-left:5px solid var(--mu);border-radius:8px;padding:12px 14px;margin:12px 0;background:var(--bg)}
+.qb.ok{border-left-color:var(--ok)}.qb.no{border-left-color:var(--dg)}
+.qt{margin:8px 0 10px;white-space:pre-wrap}
+.op{display:flex;gap:8px;padding:6px 10px;border:1px solid var(--ln);border-radius:6px;margin:5px 0;background:var(--sf)}.op span{flex:1 1 auto}
+.op.k{border-color:var(--ok)}.op.m:not(.k){border-color:var(--dg)}
+.ans{white-space:pre-wrap;background:var(--sf);border:1px solid var(--ln);border-radius:6px;padding:10px 12px;margin:6px 0}
+.onlywrong .qb.ok{display:none}
+pre.code{font:13px ui-monospace,monospace;background:var(--bg);border:1px solid var(--ln);border-radius:6px;padding:10px;overflow:auto}
+.drop{border:2px dashed var(--ln);border-radius:8px;padding:12px;text-align:center;color:var(--mu);margin:10px 0;font-size:14px}.drop.on{border-color:var(--ac);color:var(--ink)}
+.code{font:13px ui-monospace,monospace;word-break:break-all;background:var(--bg);border:1px solid var(--ln);border-radius:6px;padding:10px;max-height:140px;overflow:auto;user-select:all}
+pre.code{white-space:pre-wrap}
+.pw{display:flex;gap:6px}.pw input{flex:1 1 auto;min-width:0}.pw button{flex:0 0 auto;font-size:13px;padding:6px 10px}
+@media print{header.hd,.tabs,#v-list,#v-edit,#rctl,#lg{display:none!important}}
+</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+<main>
+<h1>Ujian Terjaga: Guru</h1>
+<p class="mu">Susun soal, atur jadwal terbit, dan lihat hasil siswa. Siswa tidak perlu kode: cukup memilih mata pelajaran.</p>
+
+<!-- ===== MASUK / DAFTAR ===== -->
+<section id="lg" class="card">
+  <div id="cfgw"><p class="mu">Sambungan database belum tertanam di aplikasi ini (lihat PANDUAN_SUPABASE.md). Isi manual di sini.</p>
+  <label for="cu">Alamat proyek Supabase</label><input id="cu" placeholder="https://xxxx.supabase.co" autocomplete="off">
+  <label for="ck">Publishable key Supabase</label><input id="ck" placeholder="sb_publishable_..." autocomplete="off"></div>
+
+  <div class="tabs" id="gtb" role="tablist" style="margin-top:0"><button type="button" class="tab" role="tab" id="gt1" aria-selected="true">Masuk</button><button type="button" class="tab" role="tab" id="gt2" aria-selected="false">Daftar guru</button></div>
+
+  <form id="gpl" novalidate>
+    <h2>Masuk</h2>
+    <p class="mu">Masuk dengan email dan kata sandi guru.</p>
+    <label for="ce">Email guru</label><input id="ce" type="email" autocomplete="username" inputmode="email">
+    <label for="cw">Kata sandi</label><div class="pw"><input id="cw" type="password" autocomplete="current-password"><button type="button" data-sh="cw">Tampilkan</button></div>
+    <div class="bar"><button class="p" id="lgb" type="submit">Masuk</button><button type="button" id="alp">Lupa kata sandi?</button></div>
+    <p id="lge" role="alert" style="font-weight:600"></p>
+  </form>
+
+  <form id="gpd" class="hide" novalidate>
+    <h2>Daftar akun guru</h2>
+    <p class="mu">Buat akun dengan email aktif. Kode pendaftaran guru diberikan oleh admin atau sekolah, supaya siswa tidak bisa membuat akun guru sendiri.</p>
+    <label for="agn">Nama lengkap</label><input id="agn" autocomplete="name">
+    <label for="age">Email guru</label><input id="age" type="email" autocomplete="email" inputmode="email">
+    <div class="row"><div><label for="agp">Kata sandi (minimal 8 karakter)</label><div class="pw"><input id="agp" type="password" autocomplete="new-password"><button type="button" data-sh="agp">Tampilkan</button></div></div>
+    <div><label for="agq">Ulangi kata sandi</label><input id="agq" type="password" autocomplete="new-password"></div></div>
+    <label for="agk">Kode pendaftaran guru</label><input id="agk" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="bar"><button class="p" id="agb" type="submit">Daftar</button></div>
+    <p id="agm" role="alert" style="font-weight:600"></p>
+  </form>
+
+  <form id="gpn" class="hide" novalidate>
+    <h2>Buat kata sandi baru</h2>
+    <p class="mu">Tautan reset dari email Anda valid. Masukkan kata sandi baru.</p>
+    <div class="row"><div><label for="anp">Kata sandi baru (minimal 8 karakter)</label><div class="pw"><input id="anp" type="password" autocomplete="new-password"><button type="button" data-sh="anp">Tampilkan</button></div></div>
+    <div><label for="anq">Ulangi kata sandi</label><input id="anq" type="password" autocomplete="new-password"></div></div>
+    <div class="bar"><button class="p" id="anb" type="submit">Simpan dan masuk</button></div>
+    <p id="anm" role="alert" style="font-weight:600"></p>
+  </form>
+</section>
+
+<section id="app" class="hide">
+  <header class="hd bar" style="justify-content:space-between;margin-top:0"><span class="mu" id="who"></span><button id="out">Keluar</button></header>
+  <div class="tabs" role="tablist"><button class="tab" role="tab" id="t1" aria-selected="true">Ujian</button><button class="tab" role="tab" id="t2" aria-selected="false">Hasil siswa</button></div>
+
+  <!-- ===== DAFTAR UJIAN ===== -->
+  <div id="v-list">
+    <div class="bar" style="margin-top:0"><button class="p" id="nw">Buat ujian baru</button><button id="rf">Muat ulang</button></div>
+    <p class="mu" id="lm"></p>
+    <div id="lx"></div>
+  </div>
+
+  <!-- ===== EDITOR ===== -->
+  <div id="v-edit" class="hide">
+    <div class="bar" style="margin-top:0"><button id="bkl">← Kembali ke daftar</button></div>
+    <div class="card">
+      <h2>Pengaturan ujian</h2>
+      <div class="row"><div><label for="jd">Judul ujian</label><input id="jd"></div><div><label for="mp">Mata pelajaran</label><input id="mp" placeholder="Contoh: Matematika"></div></div>
+      <label for="kl">Untuk kelas (pisahkan dengan koma; kosongkan bila semua kelas)</label><input id="kl" placeholder="Contoh: 9A, 9B, 9C">
+      <div class="row"><div><label for="mu">Ujian dibuka pada</label><input id="mu" type="datetime-local"></div><div><label for="se">Ujian ditutup pada</label><input id="se" type="datetime-local"></div></div>
+      <div class="row"><div><label for="mn">Durasi per siswa (menit)</label><input id="mn" type="number" min="1"></div><div><label for="mx">Batas pelanggaran sebelum otomatis dikumpulkan</label><input id="mx" type="number" min="1" max="10"></div></div>
+      <p class="mu" style="font-size:13px">Siswa bisa mulai kapan saja antara jam dibuka dan ditutup. Waktu pengerjaan dibatasi durasi atau jam tutup, mana yang lebih dulu. Soal baru bisa diunduh siswa setelah jam dibuka.</p>
+    </div>
+    <div class="card">
+      <h2>Impor soal dari Google Form</h2>
+      <p class="mu">Buka Google Form Anda, pilih menu ⋮ lalu Editor skrip, tempel skrip di bawah, jalankan, dan salin hasil JSON dari log eksekusi. Tempel hasilnya di sini. Jika form berupa kuis, kunci jawaban ikut terbawa.</p>
+      <pre class="code" id="gs">function exportSoal(){
+  var f=FormApp.getActiveForm(),qs=[],T=FormApp.ItemType;
+  f.getItems().forEach(function(it){
+    var t=it.getType(),m,k=-1,ks=[];
+    if(t==T.PARAGRAPH_TEXT){m=it.asParagraphTextItem();qs.push({y:"ur",q:m.getTitle(),o:[],p:m.getPoints()||1});return}
+    if(t==T.TEXT){m=it.asTextItem();qs.push({y:"ur",q:m.getTitle(),o:[],p:m.getPoints()||1});return}
+    if(t==T.MULTIPLE_CHOICE)m=it.asMultipleChoiceItem();else if(t==T.LIST)m=it.asListItem();else if(t==T.CHECKBOX)m=it.asCheckboxItem();else return;
+    var ch=m.getChoices();
+    ch.forEach(function(c,i){if(c.isCorrectAnswer()){k=i;ks.push(i)}});
+    qs.push({y:t==T.LIST?"dd":t==T.CHECKBOX?"cb":"pg",q:m.getTitle(),o:ch.map(function(c){return c.getValue()}),k:k,ks:ks,p:m.getPoints()||1});
+  });
+  Logger.log(JSON.stringify({t:f.getTitle(),m:30,x:3,qs:qs}));
+}</pre>
+      <div class="bar"><button id="cgs">Salin skrip</button></div>
+      <label for="ij">Hasil JSON dari Google Form</label>
+      <textarea id="ij" placeholder="Tempel JSON di sini"></textarea>
+      <div class="bar"><button class="p" id="im">Impor soal</button></div>
+      <p id="imr" class="mu"></p>
+    </div>
+    <div class="card">
+      <h2>Impor soal dari file atau link</h2>
+      <p class="mu">Semua jenis file didukung dan dikenali dari isinya: PDF (termasuk hasil cetak Google Form atau scan), foto soal (.jpg, .png, .webp, .gif), Word (.docx, .doc, .rtf, .odt), Excel (.xlsx, .xls, .csv, .ods), PowerPoint (.pptx, .odp), halaman web (.html), buku (.epub), JSON, dan teks biasa. PDF atau foto yang tidak punya teks dibaca otomatis lewat OCR di browser. Di dokumen biasa, tiap soal diawali nomor (1. 2. 3.) dan pilihan diawali A. B. C. D. Kunci bisa ditulis per soal (Kunci: B) atau di akhir dokumen di bawah judul Kunci Jawaban (1. B  2. D dan seterusnya). Soal tanpa pilihan dianggap uraian. Di Excel atau CSV, pakai kolom berjudul Soal, A, B, C, D, dan Kunci (satu soal per baris).</p>
+      <label for="pfile">File soal</label><input id="pfile" type="file">
+      <div id="drop" class="drop">Atau seret file ke halaman ini, atau tempel foto soal dengan Ctrl+V</div>
+      <label for="lk">Atau ambil dari link</label>
+      <div class="row" style="align-items:center"><div style="flex:3 1 260px"><input id="lk" type="url" inputmode="url" placeholder="https://docs.google.com/forms/d/e/.../viewform" autocomplete="off"></div><div style="flex:0 0 auto"><button class="p" id="lkb">Ambil dari link</button></div></div>
+      <label class="opt" style="font-weight:500;font-size:14px"><input type="checkbox" id="px" checked style="width:auto"> Izinkan perantara publik bila situs memblokir akses langsung</label>
+      <p class="mu" style="font-size:13px">Link harus bisa dibuka tanpa login ("siapa saja yang memiliki link"). Didukung: Google Form (link responden), Google Docs, Sheets, Slides, file di Google Drive, Dropbox, GitHub, dan link langsung ke file apa pun di atas. Google Form lewat link tidak membawa kunci jawaban. Kalau pengambilan link gagal, buka link itu di browser, ketik view-source: di depan alamatnya, salin semua teksnya, tempel di kolom Teks soal yang terbaca, lalu tekan Impor soal. Bila perantara publik dipakai, isi link itu ikut lewat layanan pihak ketiga; matikan opsinya untuk soal yang rahasia dan unggah filenya langsung.</p>
+      <div class="note" style="margin:12px 0"><b>Cara paling pasti (tanpa perantara):</b> buka link form di browser, tekan F12 lalu pilih Console, tempel kode di bawah dan tekan Enter. Soal tersalin otomatis, tempel di kolom "Teks soal yang terbaca" lalu tekan Impor soal. Di HP, simpan kode ini sebagai bookmark bernama "Salin soal", buka form, lalu jalankan bookmark itu.
+<pre class="code" id="bm">javascript:(function(){var t='FB_PUBLIC_LOAD_DATA_='+JSON.stringify(window.FB_PUBLIC_LOAD_DATA_);navigator.clipboard.writeText(t).then(function(){alert('Soal tersalin. Tempel di aplikasi.')},function(){prompt('Salin teks ini:',t)})})()</pre>
+<div class="bar"><button id="cbm">Salin kode</button></div></div>
+      <label for="pt">Teks soal yang terbaca (boleh diperbaiki dulu, atau tempel sendiri)</label>
+      <textarea id="pt" style="min-height:160px"></textarea>
+      <div class="row"><div><label for="pm">Cara impor</label><select id="pm"><option value="rep">Ganti semua soal</option><option value="add">Tambahkan ke soal yang ada</option></select></div></div>
+      <div class="bar"><button class="p" id="pi">Impor soal</button><button id="ocr">Baca ulang dengan OCR</button></div>
+      <p class="mu" style="font-size:14px">Halaman yang tidak punya teks (hasil scan, foto, atau cetak ke gambar) dibaca otomatis dengan OCR di perangkat saat file dipilih. Jika hasilnya kurang rapi atau teks PDF berantakan, tekan Baca ulang dengan OCR (memakai mesin yang dipilih di bawah). Proses bisa memakan beberapa menit untuk PDF yang panjang.</p>
+      <div class="row"><div><label for="oe">Mesin baca</label><select id="oe">
+        <option value="auto">Otomatis (OCR di perangkat; tombol Baca ulang memakai Claude bila tersedia)</option>
+        <option value="api">Claude lewat kunci API Anda (paling akurat, termasuk tulisan Arab)</option>
+        <option value="local">OCR di perangkat (gratis, tanpa kunci, akurasi lebih rendah)</option>
+      </select></div></div>
+      <div id="okw" class="hide"><label for="ok">Kunci API Anthropic (sk-ant-...)</label><input id="ok" type="password" autocomplete="off" placeholder="sk-ant-..."><p class="mu" style="font-size:13px">Kunci hanya disimpan di browser perangkat ini dan dikirim langsung ke api.anthropic.com. Pemakaian dihitung ke akun API Anda. Jangan isi di komputer bersama.</p></div>
+      <p class="mu" style="font-size:13px">OCR di perangkat mengunduh mesin baca sekitar 20 MB sekali saja dan butuh internet. Hasilnya wajib diperiksa, terutama tulisan Arab berharakat, rumus, dan nomor soal.</p>
+      <p id="pr" class="mu"></p>
+      <label for="kk">Kunci jawaban (opsional, untuk soal yang sudah ada di editor)</label>
+      <textarea id="kk" placeholder="Contoh: 1.B 2.D 3.A 4.C ... atau tulis huruf berurutan: BDACBDAB" style="min-height:60px"></textarea>
+      <div class="bar"><button id="ak">Terapkan kunci ke editor</button></div>
+      <p id="akr" class="mu" style="font-size:14px">Berguna untuk PDF Google Form hasil cetak, karena PDF itu tidak membawa kunci jawaban. Nomor mengikuti urutan Soal di editor di bawah.</p>
+    </div>
+    <div id="qs"></div>
+    <div class="bar"><button id="add">Tambah soal</button></div>
+    <div class="card">
+      <div class="bar" style="margin-top:0"><button id="sd">Simpan draf</button><button class="p" id="sp">Simpan dan terbitkan</button></div>
+      <p id="em" role="status" style="font-weight:600"></p>
+      <p class="mu" style="font-size:13px">Kunci jawaban hanya bisa dibaca setelah login guru, tidak pernah dikirim ke siswa. Setelah terbit, ujian muncul otomatis di daftar siswa dan aktif pada jam dibuka.</p>
+    </div>
+  </div>
+
+  <!-- ===== HASIL ===== -->
+  <div id="v-res" class="hide">
+    <div class="card" id="rctl">
+      <div class="row" style="align-items:end"><div><label for="rx">Ujian</label><select id="rx"></select></div><div><label for="rk">Kelas</label><select id="rk"><option value="">Semua kelas</option></select></div><div style="flex:0 0 auto"><button class="p" id="rl">Muat hasil</button></div></div>
+      <div class="bar"><label class="opt" style="margin:0;font-weight:500"><input type="checkbox" id="fw"> Hanya soal salah atau kosong</label><button id="oa">Buka semua</button><button id="ca">Tutup semua</button><button id="csv">Unduh CSV</button><button id="prt">Cetak atau simpan PDF</button><button id="dall" class="d">Hapus semua hasil</button></div>
+      <p id="rm" class="mu"></p>
+    </div>
+    <div id="sm"></div><div id="rs"></div>
+  </div>
+</section>
+</main>
+
+<div id="mo" class="hide" role="dialog" aria-modal="true" aria-labelledby="mol" style="position:fixed;inset:0;z-index:60;background:rgba(10,15,25,.8);display:flex;align-items:center;justify-content:center;padding:20px"><div class="card" style="max-width:560px;width:100%"><b id="mol"></b><p class="mu">Browser memblokir salin otomatis. Teks sudah terpilih: tekan Ctrl+C (di HP: tahan lalu pilih Salin), lalu tempel di tempat tujuan.</p><textarea id="mot" readonly style="min-height:150px"></textarea><div class="bar"><button class="p" id="moc">Tutup</button></div></div></div>
+
+<script>
+/* ===== SAMBUNGAN DATABASE: isi sekali di sini, guru cukup memasukkan email dan kata sandi ===== */
+const APP={db:"https://tyhrklztxegbqajkbisn.supabase.co",key:"sb_publishable_Xp8nGxVeDN0bvJHIRaoRxQ_Cf4gDXjT"};   /* db: alamat proyek Supabase, key: Publishable key (sb_publishable_...) dari Project Settings > API Keys. JANGAN isi dengan secret key. */
+/* ==================================================================================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L=j=>"ABCDEFGHIJ"[j]||String(j+1),nm=(a,b)=>a-b,r2=x=>Math.round(x*100)/100;
+const fmt=ms=>{try{return new Date(ms).toLocaleString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}};
+const toLocal=ms=>{if(!ms)return'';const d=new Date(ms),p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())};
+const fromLocal=v=>v?new Date(v).getTime():0;
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+
+/* ===== penyimpanan pengaturan & sesi ===== */
+const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+const PRE=!!(APP.db&&APP.key);
+let CFG={db:(APP.db||LS('tg-db')||'').replace(/\/+$/,''),key:APP.key||LS('tg-key')||''},SES=null;
+$('#cu').value=CFG.db;$('#ck').value=CFG.key;if(PRE)$('#cfgw').classList.add('hide');$('#ce').value=LS('tg-em')||'';
+try{SES=JSON.parse(LS('tg-ses'))}catch(e){}
+
+/* ===== autentikasi Supabase (email dan kata sandi, daftar, reset) ===== */
+function saveSes(s){SES=s;LS('tg-ses',JSON.stringify(s))}
+async function sbAuth(grant,body){
+ const r=await fetch(CFG.db+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{'content-type':'application/json',apikey:CFG.key},body:JSON.stringify(body)});
+ const j=await r.json().catch(()=>({}));
+ if(!r.ok)throw new Error(String(j.error_description||j.msg||j.message||j.error||('HTTP '+r.status)));
+ return j}
+async function token(){
+ if(!SES)throw new Error('belum masuk');
+ if(Date.now()<SES.exp-60000)return SES.id;
+ const j=await sbAuth('refresh_token',{refresh_token:SES.rt});
+ saveSes({id:j.access_token,rt:j.refresh_token,exp:Date.now()+(+j.expires_in)*1000,em:SES.em,nm:SES.nm});return SES.id}
+async function sb(method,table,q,body,prefer){
+ const t=await token(),h={apikey:CFG.key,Authorization:'Bearer '+t};
+ if(body!==undefined)h['content-type']='application/json';if(prefer)h.Prefer=prefer;
+ const r=await fetch(CFG.db+'/rest/v1/'+table+(q?'?'+q:''),{method,headers:h,body:body===undefined?undefined:JSON.stringify(body)});
+ if(!r.ok){const x=new Error('HTTP '+r.status);x.st=r.status;try{const j=await r.json();x.message=j.message||x.message}catch(e){}throw x}
+ const tx=await r.text();return tx?JSON.parse(tx):null}
+const netErr=x=>x&&(x.st===401||x.st===403)?'Akses ditolak database. Akun ini belum terdaftar sebagai guru. Daftar lewat tab Daftar guru dengan kode pendaftaran yang benar.':'Gagal terhubung ('+((x&&x.message)||x)+'). Periksa internet dan pengaturan.';
+const authMsg=m=>/invalid login|invalid_credentials/i.test(m)?'Email atau kata sandi salah.':/api key|apikey|invalid.*key/i.test(m)?'Publishable key tidak valid.':/rate limit|too many|security purposes/i.test(m)?'Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.':/not confirmed/i.test(m)?'Email belum dikonfirmasi. Buka email dari sistem dan tekan tautan konfirmasinya.':/already registered|already been registered|user_already_exists/i.test(m)?'Email ini sudah terdaftar. Silakan masuk, atau pakai Lupa kata sandi.':/database error saving new user/i.test(m)?'Kode pendaftaran guru salah.':/signups? (not allowed|are disabled)|signup_disabled/i.test(m)?'Pendaftaran sedang ditutup di database.':/weak_password|password.*(weak|least|short)/i.test(m)?'Kata sandi terlalu lemah. Pakai minimal 8 karakter, campur huruf dan angka.':/valid email|invalid.*email|email_address_invalid/i.test(m)?'Format email tidak valid.':/Failed to fetch|NetworkError|Load failed/i.test(m)?'Tidak bisa terhubung. Periksa internet.':'Gagal: '+m;
+
+const daftarMsg=(c,st)=>({kode_salah:'Kode pendaftaran guru salah.',kode_kosong:'Isi kode pendaftaran guru.',terlalu_banyak_percobaan:'Terlalu banyak percobaan kode. Tunggu sekitar 15 menit lalu coba lagi.',email_terdaftar:'Email ini sudah terdaftar. Silakan masuk, atau pakai Lupa kata sandi.',email_tidak_valid:'Format email tidak valid.',sandi_pendek:'Kata sandi minimal 8 karakter.',sandi_lemah:'Kata sandi terlalu lemah. Pakai minimal 8 karakter, campur huruf dan angka.',nama_kosong:'Isi nama lengkap.'}[c]||(st===404?'Layanan pendaftaran guru belum aktif di database.':'Pendaftaran gagal ('+(c||('HTTP '+st))+'). Coba lagi.'));
+const EMRE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const setMsg=(id,t,ok)=>{const n=$(id);n.textContent=t||'';n.style.color=ok?'var(--ok)':'var(--dg)'};
+const saveFrom=(j,em)=>saveSes({id:j.access_token,rt:j.refresh_token,exp:Date.now()+(+j.expires_in||3600)*1000,em:(j.user&&j.user.email)||em||'',nm:(j.user&&j.user.user_metadata&&j.user.user_metadata.nama)||''});
+function readCfg(){CFG=PRE?{db:APP.db.replace(/\/+$/,''),key:APP.key}:{db:$('#cu').value.trim().replace(/\/+$/,''),key:$('#ck').value.trim()};return /^https:\/\//.test(CFG.db)&&!!CFG.key}
+const NOCFG='Isi alamat database dan API Key dulu.';
+async function authCall(path,body,bearer,method){
+ const h={'content-type':'application/json',apikey:CFG.key};if(bearer)h.Authorization='Bearer '+bearer;
+ const r=await fetch(CFG.db+path,{method:method||'POST',headers:h,body:JSON.stringify(body)});
+ const j=await r.json().catch(()=>({}));
+ if(!r.ok)throw new Error(String(j.msg||j.error_description||j.message||j.error||('HTTP '+r.status)));
+ return j}
+
+/* tab Masuk / Daftar */
+function gtab(n){$('#gt1').setAttribute('aria-selected',n===1);$('#gt2').setAttribute('aria-selected',n===2);
+ $('#gpl').classList.toggle('hide',n!==1);$('#gpd').classList.toggle('hide',n!==2);$('#gpn').classList.add('hide');
+ setMsg('#lge','');setMsg('#agm','')}
+$('#gt1').onclick=()=>gtab(1);$('#gt2').onclick=()=>gtab(2);
+$('#lg').addEventListener('click',e=>{const b=e.target.closest('button[data-sh]');if(!b)return;const i=$('#'+b.dataset.sh),h=i.type==='password';i.type=h?'text':'password';b.textContent=h?'Sembunyikan':'Tampilkan'});
+
+/* masuk */
+$('#gpl').onsubmit=async ev=>{ev.preventDefault();setMsg('#lge','');
+ const em=$('#ce').value.trim().toLowerCase(),pw=$('#cw').value;
+ if(!readCfg()){setMsg('#lge',NOCFG);return}
+ if(!em||!pw){setMsg('#lge','Isi email dan kata sandi.');return}
+ if(!EMRE.test(em)){setMsg('#lge','Format email tidak valid.');return}
+ $('#lgb').disabled=true;
+ try{const j=await sbAuth('password',{email:em,password:pw});
+  saveFrom(j,em);LS('tg-db',CFG.db);LS('tg-key',CFG.key);LS('tg-em',em);$('#cw').value='';enter()}
+ catch(x){setMsg('#lge',authMsg(x.message))}
+ $('#lgb').disabled=false};
+
+/* lupa kata sandi */
+$('#alp').onclick=async()=>{setMsg('#lge','');
+ const em=$('#ce').value.trim().toLowerCase();
+ if(!readCfg()){setMsg('#lge',NOCFG);return}
+ if(!EMRE.test(em)){setMsg('#lge','Isi email guru di kolom atas, lalu tekan Lupa kata sandi.');return}
+ $('#alp').disabled=true;
+ try{const ru=/^https?:$/.test(location.protocol)?'?redirect_to='+encodeURIComponent(location.origin+location.pathname):'';
+  await authCall('/auth/v1/recover'+ru,{email:em});
+  setMsg('#lge','Jika email itu terdaftar, tautan untuk membuat kata sandi baru sudah dikirim. Cek kotak masuk dan folder spam.',true)}
+ catch(x){setMsg('#lge',authMsg(x.message))}
+ $('#alp').disabled=false};
+
+/* daftar */
+$('#gpd').onsubmit=async ev=>{ev.preventDefault();setMsg('#agm','');
+ const nama=$('#agn').value.trim().replace(/\s+/g,' '),em=$('#age').value.trim().toLowerCase(),pw=$('#agp').value,pw2=$('#agq').value,kode=$('#agk').value.trim();
+ if(!readCfg()){setMsg('#agm',NOCFG);return}
+ if(nama.length<2){setMsg('#agm','Isi nama lengkap.');return}
+ if(!EMRE.test(em)){setMsg('#agm','Format email tidak valid.');return}
+ if(pw.length<8){setMsg('#agm','Kata sandi minimal 8 karakter.');return}
+ if(pw!==pw2){setMsg('#agm','Kata sandi dan ulangannya tidak sama.');return}
+ if(!kode){setMsg('#agm','Isi kode pendaftaran guru.');return}
+ $('#agb').disabled=true;setMsg('#agm','Mendaftarkan…',true);$('#agm').style.color='var(--mu)';
+  try{
+  const r=await fetch(CFG.db+'/functions/v1/daftar-guru',{method:'POST',headers:{'content-type':'application/json',apikey:CFG.key},body:JSON.stringify({nama,email:em,password:pw,kode})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error(daftarMsg(d.error,r.status));e.pre=1;throw e}
+  const j=await sbAuth('password',{email:em,password:pw});
+  saveFrom(j,em);if(!SES.nm)saveSes({...SES,nm:nama});LS('tg-db',CFG.db);LS('tg-key',CFG.key);LS('tg-em',em);
+  ['#agp','#agq','#agk'].forEach(k=>$(k).value='');enter()}
+ catch(x){setMsg('#agm',x.pre?x.message:authMsg(x.message))}
+ $('#agb').disabled=false};
+
+/* tautan reset dari email: #access_token=...&type=recovery */
+let RC=null;
+function checkRecovery(){const h=location.hash.replace(/^#/,'');if(h.indexOf('=')<0)return false;
+ const p=new URLSearchParams(h),clean=()=>history.replaceState(null,'',location.pathname+location.search);
+ if(p.get('error_description')){clean();setMsg('#lge','Tautan reset tidak valid atau sudah kedaluwarsa. Minta tautan baru lewat Lupa kata sandi.');return false}
+ if(p.get('type')==='recovery'&&p.get('access_token')){
+  RC={id:p.get('access_token'),rt:p.get('refresh_token'),exp:Date.now()+(+p.get('expires_in')||3600)*1000};clean();
+  $('#gtb').classList.add('hide');$('#gpl').classList.add('hide');$('#gpd').classList.add('hide');$('#gpn').classList.remove('hide');return true}
+ return false}
+$('#gpn').onsubmit=async ev=>{ev.preventDefault();setMsg('#anm','');
+ const pw=$('#anp').value,pw2=$('#anq').value;
+ if(pw.length<8){setMsg('#anm','Kata sandi minimal 8 karakter.');return}
+ if(pw!==pw2){setMsg('#anm','Kata sandi dan ulangannya tidak sama.');return}
+ if(!readCfg()){setMsg('#anm',NOCFG);return}
+ $('#anb').disabled=true;
+ try{const u=await authCall('/auth/v1/user',{password:pw},RC.id,'PUT');
+  saveSes({id:RC.id,rt:RC.rt,exp:RC.exp,em:u.email||'',nm:(u.user_metadata&&u.user_metadata.nama)||''});RC=null;
+  $('#anp').value=$('#anq').value='';$('#gtb').classList.remove('hide');gtab(1);enter()}
+ catch(x){setMsg('#anm',authMsg(x.message))}
+ $('#anb').disabled=false};
+
+/* keluar */
+function keluar(msg){
+ if(SES&&CFG.db&&CFG.key)fetch(CFG.db+'/auth/v1/logout',{method:'POST',headers:{apikey:CFG.key,Authorization:'Bearer '+SES.id}}).catch(()=>{});
+ SES=null;LS('tg-ses',null);DR={};EDITING=null;E=null;$('#lx').innerHTML='';$('#lm').textContent='';
+ $('#app').classList.add('hide');$('#lg').classList.remove('hide');tab(1);gtab(1);setMsg('#lge',msg||'')}
+$('#out').onclick=()=>keluar('');
+async function enter(){
+ $('#lg').classList.add('hide');$('#app').classList.remove('hide');
+ $('#who').textContent='Masuk sebagai '+(SES.nm?SES.nm+' ('+SES.em+')':SES.em);
+ try{await token()}catch(x){if(!(x instanceof TypeError)){keluar('Sesi berakhir. Silakan masuk lagi.');return}}
+ loadList()}
+
+/* ===== tab ===== */
+function tab(n){$('#t1').setAttribute('aria-selected',n===1);$('#t2').setAttribute('aria-selected',n===2);
+ $('#v-res').classList.toggle('hide',n!==2);$('#v-list').classList.toggle('hide',n!==1||!!EDITING);$('#v-edit').classList.toggle('hide',n!==1||!EDITING);
+ if(n===2)fillRx()}
+$('#t1').onclick=()=>tab(1);$('#t2').onclick=()=>tab(2);
+
+/* ===== daftar ujian ===== */
+let DR={},EDITING=null,E=null;
+const blank=()=>({id:uid(),t:'',mapel:'',kelas:'',mulai:0,selesai:0,m:60,x:3,terbit:false,qs:[{q:'',o:['','','',''],k:-1,y:'pg',p:1}]});
+const status=e=>{if(!e.terbit)return['Draf','s-dr'];const n=Date.now();return n<e.mulai?['Terjadwal','s-tj']:n<e.selesai?['Berlangsung','s-bl']:['Selesai','s-sl']};
+async function loadList(){
+ $('#lm').textContent='Memuat…';
+ try{const o=(await sb('GET','draf','select=id,j'))||[];DR={};o.forEach(x=>{try{DR[x.id]=JSON.parse(x.j)}catch(e){}});drawList();$('#lm').textContent=Object.keys(DR).length?'':'Belum ada ujian. Tekan Buat ujian baru.'}
+ catch(x){$('#lm').textContent=netErr(x)}}
+function drawList(){
+ const a=Object.values(DR).sort((p,q)=>(q.mulai||0)-(p.mulai||0));
+ $('#lx').innerHTML=a.map(e=>{const[s,c]=status(e);return `<div class="card"><div class="ex"><div class="inf"><b>${esc(e.mapel||e.t||'(tanpa nama)')}</b> <em class="tg ${c}">${s}</em><br><span class="mu">${esc(e.t)}${e.kelas?' · Kelas '+esc(e.kelas):' · Semua kelas'} · ${e.qs.length} soal · ${e.m} menit</span><br><span class="mu">${e.mulai?fmt(e.mulai)+' sampai '+fmt(e.selesai):'Jadwal belum diatur'}</span></div>
+  <div class="bar" style="margin:0"><button data-a="edit" data-id="${e.id}">Edit</button>${e.terbit?`<button data-a="tarik" data-id="${e.id}">Tarik dari siswa</button>`:`<button class="p" data-a="pub" data-id="${e.id}">Terbitkan</button>`}<button data-a="dup" data-id="${e.id}">Duplikat</button><button class="d" data-a="del" data-id="${e.id}">Hapus</button></div></div></div>`}).join('')}
+$('#rf').onclick=loadList;
+$('#nw').onclick=()=>openEdit(blank());
+$('#lx').onclick=async e=>{const b=e.target.closest('button[data-a]');if(!b)return;const x=DR[b.dataset.id],a=b.dataset.a;if(!x)return;
+ try{
+  if(a==='edit')openEdit(JSON.parse(JSON.stringify(x)));
+  else if(a==='dup'){const c=JSON.parse(JSON.stringify(x));c.id=uid();c.t+=' (salinan)';c.terbit=false;c.mulai=0;c.selesai=0;await saveDraft(c);DR[c.id]=c;drawList()}
+  else if(a==='pub'){const m=validate(x);if(m){alert(m);return}await publish(x);drawList()}
+  else if(a==='tarik'){if(!confirm('Tarik ujian ini? Ujian hilang dari daftar siswa. Hasil yang sudah masuk tetap tersimpan.'))return;await unpublish(x);drawList()}
+  else if(a==='del'){if(!confirm('Hapus ujian ini beserta soal dan kuncinya? Hasil siswa yang sudah masuk tidak ikut terhapus.'))return;
+   await Promise.all(['daftar','soal','kunci','draf'].map(tb=>sb('DELETE',tb,'id=eq.'+encodeURIComponent(x.id))));delete DR[x.id];drawList()}
+ }catch(err){alert(netErr(err))}};
+
+/* ===== simpan, terbitkan, tarik ===== */
+const up=(tb,row)=>sb('POST',tb,'',row,'resolution=merge-duplicates,return=minimal');
+const saveDraft=e=>up('draf',{id:e.id,j:JSON.stringify(e)});
+function validate(e){
+ if(!e.t.trim()&&!e.mapel.trim())return 'Isi judul atau mata pelajaran dulu.';
+ if(!e.mulai||!e.selesai)return 'Atur tanggal dan jam ujian dibuka dan ditutup.';
+ if(e.selesai<=e.mulai)return 'Jam ditutup harus setelah jam dibuka.';
+ if(!e.qs.length)return 'Belum ada soal.';
+ const bad=e.qs.findIndex(q=>!q.q.trim()||(q.y!=='ur'&&q.o.some(o=>!o.trim())));
+ if(bad>=0)return 'Soal '+(bad+1)+' belum lengkap: pertanyaan atau pilihannya masih kosong.';
+ const nk=e.qs.findIndex(q=>q.y==='cb'?!(q.ks&&q.ks.length):q.y!=='ur'&&!(q.k>=0&&q.k<q.o.length));
+ if(nk>=0)return 'Kunci jawaban soal '+(nk+1)+' belum dipilih.';
+ return ''}
+async function publish(e){
+ const pub=e.qs.map(q=>({q:q.q,o:q.y==='ur'?[]:q.o,y:['ur','cb','dd'].includes(q.y)?q.y:'pg',p:q.p||1}));
+ const keys=e.qs.map(q=>q.y==='ur'?(q.r||''):q.y==='cb'?(q.ks||[]):q.k);
+ await up('kunci',{id:e.id,j:JSON.stringify(keys)});
+ await up('soal',{id:e.id,j:JSON.stringify(pub)});
+ await up('daftar',{id:e.id,judul:e.t,mapel:e.mapel||e.t,kelas:e.kelas.trim(),mulai:e.mulai,selesai:e.selesai,durasi:e.m,maks:e.x,jml:e.qs.length});
+ e.terbit=true;await saveDraft(e);DR[e.id]=e}
+async function unpublish(e){await sb('DELETE','daftar','id=eq.'+encodeURIComponent(e.id));await sb('DELETE','soal','id=eq.'+encodeURIComponent(e.id));e.terbit=false;await saveDraft(e);DR[e.id]=e}
+
+/* ===== editor ===== */
+function openEdit(e){E=e;EDITING=e.id;$('#v-list').classList.add('hide');$('#v-edit').classList.remove('hide');
+ $('#jd').value=e.t;$('#mp').value=e.mapel;$('#kl').value=e.kelas;$('#mu').value=toLocal(e.mulai);$('#se').value=toLocal(e.selesai);$('#mn').value=e.m;$('#mx').value=e.x;
+ $('#em').textContent='';$('#pr').textContent='';$('#akr').textContent='';$('#pt').value='';$('#ij').value='';GFQ=null;draw();scrollTo(0,0)}
+function closeEdit(){EDITING=null;E=null;$('#v-edit').classList.add('hide');$('#v-list').classList.remove('hide');drawList()}
+$('#bkl').onclick=()=>{if(confirm('Kembali ke daftar? Perubahan yang belum disimpan akan hilang.'))closeEdit()};
+$('#jd').oninput=e=>E.t=e.target.value;$('#mp').oninput=e=>E.mapel=e.target.value;$('#kl').oninput=e=>E.kelas=e.target.value;
+$('#mu').oninput=e=>E.mulai=fromLocal(e.target.value);$('#se').oninput=e=>E.selesai=fromLocal(e.target.value);
+$('#mn').oninput=e=>E.m=Math.max(1,+e.target.value||1);$('#mx').oninput=e=>E.x=Math.min(10,Math.max(1,+e.target.value||1));
+function draw(){
+ $('#qs').innerHTML=E.qs.map((q,i)=>`<div class="card" data-i="${i}">
+  <div class="row" style="align-items:center"><h3 style="flex:1 1 auto">Soal ${i+1}</h3><button class="d" data-del="${i}" style="flex:0 0 auto">Hapus</button></div>
+  <label>Pertanyaan</label><textarea data-f="q">${esc(q.q)}</textarea>
+  <div class="row"><div><label>Jenis soal</label><select data-f="y"><option value="pg" ${q.y!=="ur"&&q.y!=="cb"&&q.y!=="dd"?"selected":""}>Pilihan ganda</option><option value="ur" ${q.y==="ur"?"selected":""}>Uraian</option><option value="cb" ${q.y==="cb"?"selected":""}>Kotak centang (banyak jawaban)</option><option value="dd" ${q.y==="dd"?"selected":""}>Dropdown</option></select></div>${q.y==="ur"?"":`<div><label>Jumlah pilihan</label><select data-f="n">${[2,3,4,5,6,7,8,9,10].map(n=>`<option ${q.o.length===n?"selected":""}>${n}</option>`).join("")}</select></div>`}<div><label>Bobot nilai</label><input type="number" min="0" step="any" data-f="p" value="${q.p||1}"></div></div>
+  ${q.y==="ur"?`<label>Pedoman jawaban atau rubrik (hanya terlihat guru)</label><textarea data-f="r">${esc(q.r||"")}</textarea>`:`<label>Pilihan jawaban (tandai yang benar)${q.y!=="cb"&&!(q.k>=0)?' <span style="color:var(--dg)">· kunci belum dipilih</span>':''}</label>`}
+  ${q.o.map((o,j)=>`<div class="opt"><b style="min-width:20px">${L(j)}.</b><input type="${q.y==="cb"?"checkbox":"radio"}" name="k${i}" data-k="${j}" ${(q.y==="cb"?(q.ks||[]).includes(j):q.k===j)?"checked":""} aria-label="Kunci ${j+1}"><input data-o="${j}" value="${esc(o)}"></div>`).join("")}
+ </div>`).join("")}
+$('#qs').addEventListener('input',e=>{const c=e.target.closest('.card');if(!c)return;const q=E.qs[c.dataset.i],d=e.target.dataset;
+ if(d.f){const f=d.f;
+  if(f==='n'){const n=+e.target.value;while(q.o.length<n)q.o.push('');q.o.length=n;if(q.k>=n)q.k=-1;if(q.ks)q.ks=q.ks.filter(j=>j<n);draw();return}
+  if(f==='y'){q.y=e.target.value;if(q.y==='cb'&&!q.ks)q.ks=q.k>=0?[q.k]:[];if(q.y==='ur')q.o=[];else if(q.o.length<2)q.o=['','','',''];draw();return}
+  q[f]=f==='p'?(+e.target.value>0?+e.target.value:1):e.target.value;return}
+ if(d.o!==undefined)q.o[d.o]=e.target.value;
+ if(d.k!==undefined){const j=+d.k;if(q.y==='cb'){q.ks=q.ks||[];const x=q.ks.indexOf(j);if(e.target.checked){if(x<0)q.ks.push(j)}else if(x>=0)q.ks.splice(x,1)}else{const was=q.k;q.k=j;if(was<0)draw()}}});
+$('#qs').addEventListener('click',e=>{const d=e.target.dataset.del;if(d!==undefined&&E.qs.length>1){E.qs.splice(+d,1);draw()}});
+$('#add').onclick=()=>{E.qs.push({q:'',o:['','','',''],k:-1,y:'pg',p:1});draw()};
+async function saveE(pub){
+ const m=$('#em');m.style.color='var(--dg)';
+ if(pub){const v=validate(E);if(v){m.textContent=v;return}}
+ $('#sd').disabled=$('#sp').disabled=true;m.style.color='var(--mu)';m.textContent='Menyimpan…';
+ try{if(pub)await publish(E);else{await saveDraft(E);DR[E.id]=E;
+   if(E.terbit&&!validate(E)&&confirm('Ujian ini sudah terbit. Perbarui juga versi yang dilihat siswa?'))await publish(E)}
+  m.style.color='var(--ok)';m.textContent=pub?'Tersimpan dan terbit. Siswa melihatnya di daftar mata pelajaran, aktif pada '+fmt(E.mulai)+'.':'Draf tersimpan.'}
+ catch(x){m.style.color='var(--dg)';m.textContent=netErr(x)}
+ $('#sd').disabled=$('#sp').disabled=false}
+$('#sd').onclick=()=>saveE(false);$('#sp').onclick=()=>saveE(true);
+
+/* ===== impor soal (PDF, foto OCR, Word, Excel, Google Form, link, teks) ===== */
+const save=()=>{};
+async function copyTxt(t){try{await navigator.clipboard.writeText(t);return true}catch(e){}
+ try{const a=document.createElement("textarea");a.value=t;a.readOnly=true;a.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);const ok=document.execCommand("copy");a.remove();return ok}catch(e){return false}}
+function manual(t,l){$("#mol").textContent=l;const a=$("#mot");a.value=t;$("#mo").classList.remove("hide");a.focus();a.select()}
+document.addEventListener("click",e=>{if(e.target.id==="moc")$("#mo").classList.add("hide")});
+
+$("#cgs").onclick=async()=>{const t=$("#gs").textContent;
+ {const ok=await copyTxt(t);$("#cgs").textContent=ok?"Skrip tersalin":"Salin manual";if(!ok)manual(t,"Skrip Google Form")}
+ setTimeout(()=>$("#cgs").textContent="Salin skrip",2000)};
+$("#im").onclick=()=>{const r=$("#imr"),v=$("#ij").value,a=v.indexOf("{"),b=v.lastIndexOf("}");r.style.color="var(--dg)";
+ try{const j=JSON.parse(v.slice(a,b+1));
+  const qs=(j.qs||[]).filter(q=>q&&q.q&&Array.isArray(q.o)&&(q.y==="ur"||q.o.length>1)).map(q=>q.y==="ur"?({q:String(q.q),o:[],k:0,y:"ur",p:+q.p>0?+q.p:1}):({q:String(q.q),o:q.o.map(String),k:q.y==="cb"?0:q.k>=0?Math.min(+q.k,q.o.length-1):-1,ks:q.y==="cb"?(q.ks||[]).filter(j=>j<q.o.length):undefined,y:q.y==="dd"?"dd":q.y==="cb"?"cb":"pg",p:+q.p>0?+q.p:1})).filter(q=>!isID(q));
+  if(!qs.length)throw 0;
+  E.qs=qs;if(!E.t.trim())E.t=String(j.t||'');$('#jd').value=E.t;draw();
+  r.style.color="var(--ok)";r.textContent=qs.length+" soal berhasil diimpor. Periksa kunci jawaban di bawah sebelum membagikan kode ujian."}
+ catch(e){r.textContent="JSON tidak terbaca atau tidak ada soal pilihan ganda. Pastikan hasil log disalin utuh."}};
+
+function html2t(h){const d=new DOMParser().parseFromString(h,'text/html'),out=[];let n=0,tn=0;
+ const lst=(ol,dp)=>{let i=0;for(const li of ol.children){i++;const cl=li.cloneNode(true);cl.querySelectorAll('ol,ul').forEach(x=>x.remove());let s=cl.textContent.trim();
+  if(dp===0){if(!/^[A-Ja-j]\s*[.)]\s*\S/.test(s)){n++;if(!/^\d+\s*[.)]/.test(s))s=n+'. '+s}}else if(!/^[A-Ja-j]\s*[.)]/.test(s))s=String.fromCharCode(64+i)+'. '+s;
+  out.push(s);for(const c of li.children)if(/^[OU]L$/.test(c.tagName))lst(c,dp+1)}};
+ for(const c of d.body.children){if(/^[OU]L$/.test(c.tagName))lst(c,0);
+  else if(c.tagName==='TABLE'){const rows=[...c.querySelectorAll('tr')].map(tr=>[...tr.children].map(x=>x.textContent.replace(/\s+/g,' ').trim()));
+   if(rows[0]&&rows[0].some(x=>/^(soal|pertanyaan)/i.test(x))){const r=rowsToText(rows,tn);if(r.t){out.push(r.t);tn=r.n}}
+   else rows.forEach(r=>{const x=r.filter(Boolean).join(' ');if(x)out.push(x)})}
+  else{c.querySelectorAll('br').forEach(b=>b.replaceWith('\n'));out.push(c.textContent.trim())}}
+ return out.join('\n')}
+/*PURE-START*/
+const BIDI=/[‎‏‪-‮⁦-⁩]/g;
+const SKIP=/^(Konten ini tidak dibuat atau didukung oleh Google\.?|Google( Formulir)?|Formulir|Forms)$/i;
+const HF=/^\d{1,2}\s*\/\s*\d{1,2}\s*\/\s*\d{2,4},?\s*\d{1,2}:\d{2}|docs\.google\.com|^https?:\/\/|^\d{1,3}\s*[\/|]\s*\d{1,3}$/i;
+const isTan=l=>l.length<50&&/satu\s+ova[l1I]\s*saja|mark only one oval/i.test(l);
+const isCen=l=>l.length<55&&/centang\s+semua|check all that apply/i.test(l);
+const isID=q=>{const t=q.q.split('[gambar/teks tidak terbaca]').join('').replace(/\[gambar[^\]]*\]\s*/g,'').trim();return t.length<45&&!/\?/.test(t)&&t.split(/\s+/).length<=5&&(q.o.length===0||q.o.every(o=>o.length<=24))&&/^(nama( lengkap| siswa| peserta)?|no\.?( ?peserta| ?absen| ?induk)?( ujian)?|nomor( peserta| absen| induk)?|kelas|ruang(an)?|absen|nisn?|email|alamat email|nama sekolah|sekolah|mata pelajaran|tanggal)\b/i.test(t.replace(/^[^\p{L}\p{N}]+/u,''))};
+const NOISE=l=>{const t=l.t.trim();return (/^[\s0OoCc()\[\]\-—“”"'|©®]+$/.test(t)&&/[OoCc()\[\]]/.test(t))||(l.y0!=null&&l.y1-l.y0>0.03)};
+const MARK='[gambar/teks tidak terbaca]';
+
+/* bersihkan satu baris dari sampah OCR / cetak Google Form */
+function cleanTxt(s,gf){
+ s=s.replace(BIDI,'').replace(/\s+/g,' ').trim();
+ if(gf){
+  s=s.replace(/\s*[^\w\s]?\s*\b\d+(?:[.,]\d+)?\s*po[il1]n\b/gi,' ');
+  s=s.replace(/^\W{0,2}\s*po[il1]n\s*$/i,'');
+  s=s.trim();
+  s=s.replace(/(?:\s+\S{1,2}){3,}$/,m=>/\p{L}{3}/u.test(m)?m:'');
+  s=s.replace(/([.?:…])\s+[xX×]\s*$/,'$1');
+  s=s.replace(/\s*[“”"*£&«»—–]+\s*$/,'');
+  s=s.replace(/\s+/g,' ').trim();
+ }
+ return s}
+/* buang simbol oval di awal pilihan */
+const OVAL=/^[\(\[\{<]\s*[^\p{L}\p{N}\s]{0,3}\s*[cCoO]{0,2}\s*[\)\]\}>]\s*/u;
+function optClean(s){
+ s=s.replace(OVAL,'').replace(/^[\(\{]\s*(?=\p{L})/u,'').replace(/^[○◯◦●■□☐☑✓•·]\s*/u,'').replace(/^[O©®]\s+(?=\p{L})/u,'');
+ return s.trim()}
+const isJunk=(c,s,opt)=>{const t=s.replace(/\s/g,'');if(t.length<4)return false;
+ const sym=(t.match(/[^\p{L}\p{N}.,;:!?'"()\-\/=+%…]/gu)||[]).length;
+ return sym/t.length>0.25||(!opt&&c!=null&&c<45&&s.length<45&&!/\p{L}{5,}/u.test(s))};
+
+/* apakah baris ini awal soal baru? (nomor harus berurutan) */
+function qStart(s,lastN,canRestart){
+ if(/^\d{1,3}\.\d/.test(s))return null;
+ const m=s.match(/^(\d{1,3})\s*([.)])\s*(\S.*)?$/);if(!m)return null;
+ const n=+m[1],sep=m[2],rest=m[3]||'';
+ const ok=lastN===0||(n>lastN&&n<=lastN+(sep==='.'?4:1))||(canRestart&&n===1&&sep==='.'&&rest);
+ return ok?{n,rest}:null}
+
+/* koreksi salah baca q/g yang umum pada istilah Arab-Indonesia (hanya untuk hasil OCR) */
+function fixOcr(t){
+ return t.replace(/\bO(?=(?:adiran|adir|udrat|idam|iyam\w*|ur'?an|alb))/g,'Q')
+  .replace(/\b([Gg])(?=iyam)/g,(m,c)=>c==='G'?'Q':'q')
+  .replace(/\b([Nn])agli/g,'$1aqli').replace(/\b([Bb])aga(?=['’,.\s]|$)/g,"$1aqa").replace(/\bBaga'/g,"Baqa'").replace(/\b([Tt])agwa/g,'$1aqwa')
+  .replace(/\bGur'an/g,"Qur'an").replace(/\bAl-Gur/g,'Al-Qur').replace(/\bgur'an/g,"qur'an")}
+
+/* gabungkan baris-baris (dengan posisi bila ada) menjadi teks soal yang bersih.
+   pages: [[{t,x,y0,y1,c}]]  x,y0,y1 pecahan 0..1 dari halaman; c = keyakinan OCR */
+/* gabungkan potongan yang sejajar secara vertikal (mis. nomor soal yang terbaca terpisah dari teksnya) */
+function mergeRows(pg){
+ if(!pg.length||pg.some(l=>l.y0==null))return pg;
+ const a=pg.slice().sort((p,q)=>(p.y0+p.y1)-(q.y0+q.y1)),rows=[];
+ for(const l of a){const r=rows[rows.length-1],cy=(l.y0+l.y1)/2;
+  if(r&&Math.abs(cy-r.cy)<0.5*Math.min(r.h,Math.max(0.004,l.y1-l.y0))){r.items.push(l);r.cy=(r.cy*(r.items.length-1)+cy)/r.items.length;r.h=Math.min(r.h,Math.max(0.004,l.y1-l.y0))}
+  else rows.push({cy,h:Math.max(0.004,l.y1-l.y0),items:[l]})}
+ return rows.map(r=>{const it=r.items.sort((p,q)=>p.x-q.x);
+  return{t:it.map(z=>z.t.trim()).join(' '),x:it[0].x,y0:Math.min(...it.map(z=>z.y0)),y1:Math.max(...it.map(z=>z.y1)),c:Math.min(...it.map(z=>z.c==null?100:z.c))}})}
+function linesToText(pages){
+ const all=[];pages.forEach(pg=>mergeRows(pg.filter(l=>!NOISE(l))).forEach(l=>all.push(l)));
+ const gf=all.some(l=>isTan(l.t)||isCen(l.t));
+ const xs=all.filter(l=>l.x!=null&&(isTan(l.t)||isCen(l.t))).map(l=>l.x).sort((a,b)=>a-b);
+ const xT=xs.length?xs[xs.length>>1]:null;
+ const out=[],st={n:0,inO:false,prev:null,junk:false,sp:null};
+ for(const l of all){
+  if(l.y0!=null&&(l.y1<0.04||l.y0>0.955))continue;
+  if(HF.test(l.t.trim()))continue;
+  let s=cleanTxt(l.t,gf);
+  if(!s||SKIP.test(s)||/^(poin|points?)$/i.test(s)||!/[\p{L}\p{N}]/u.test(s))continue;
+  if(gf&&st.sp&&st.sp.y1!=null&&l.y0!=null&&(l.y0-st.sp.y1)>0.05&&st.n>0&&!st.inO&&out[out.length-1]!==MARK)out.push(MARK);if(isTan(s)){out.push('Tandai satu oval saja.');st.inO=true;st.prev=null;st.sp=null;continue}
+  if(gf&&st.sp&&st.sp.y1!=null&&l.y0!=null&&(l.y0-st.sp.y1)>0.05&&st.n>0&&!st.inO&&out[out.length-1]!==MARK)out.push(MARK);if(isCen(s)){out.push('Centang semua yang sesuai.');st.inO=true;st.prev=null;st.sp=null;continue}
+  const q=qStart(s,st.n,st.inO);
+  if(q){st.n=q.n;st.inO=false;st.prev=null;st.junk=false;st.sp=l;out.push(s);continue}
+  if(xT!=null&&l.x!=null&&l.x<xT-0.018&&st.n>0)continue; /* teks bagian/petunjuk di luar soal */
+  if(st.inO&&xT!=null&&l.x!=null&&st.n>0&&st.prev&&st.prev.y1!=null&&l.y0!=null&&(l.y0-st.prev.y1)>0.05&&Math.abs(l.x-xT)<0.02){st.n++;st.inO=false;st.prev=null;st.junk=false;st.sp=l;out.push(st.n+'. '+s);continue} /* soal yang nomornya tidak terbaca */
+  if(st.inO){
+   const oc=optClean(s),jk=isJunk(l.c,oc,true);
+   if(st.prev&&l.y0!=null&&st.prev.y1!=null&&(l.y0-st.prev.y1)<1.2*Math.max(0.004,st.prev.y1-st.prev.y0)&&!jk&&out[out.length-1]!==MARK)out[out.length-1]+=' '+oc;
+   else out.push(jk?MARK:oc);
+   st.prev=l;continue}
+  if(gf&&isJunk(l.c,s)){if(!st.junk)out.push(MARK);st.junk=true;continue}
+  if(gf&&st.sp&&st.sp.y1!=null&&l.y0!=null&&(l.y0-st.sp.y1)>0.05&&st.n>0&&out[out.length-1]!==MARK)out.push(MARK); /* celah besar di dalam soal = kemungkinan ada gambar */
+  st.junk=false;st.sp=l;out.push(s)}
+ return out.join('\n')}
+
+function parseGF(lines){
+ const qs=[],head=[];let cur=null,lastN=0;
+ const fin=()=>{if(cur){cur.q=cur.q.replace(/\s*\*$/,'').trim();qs.push(cur)}cur=null};
+ for(const l of lines){
+  if(SKIP.test(l))continue;
+  const m=qStart(l,lastN,cur&&cur.o.length>=2);
+  if(m){fin();lastN=m.n;cur={n:m.n,q:m.rest,o:[],k:0,y:'ur',hk:0,mode:0};continue}
+  if(!cur){head.push(l);continue}
+  if(isTan(l)){cur.mode=1;cur.y='pg';continue}
+  if(isCen(l)){cur.mode=2;cur.y='cb';continue}
+  if(cur.mode)cur.o.push(optClean(l));else cur.q+=(cur.q?' ':'')+l}
+ fin();
+ qs.title=head[0]&&!/^formulir tanpa judul$/i.test(head[0])?head[0]:(head[1]||head[0]||'');
+ return qs}
+
+/* pilihan A. B. C. (juga bila satu baris berisi beberapa pilihan) */
+function takeOpts(l,n){
+ const parts=l.split(/\s+(?=[A-Za-z]\s*[.)]\s*\S)/),res=[];
+ for(const p of parts){const m=p.match(/^([A-Za-z])\s*[.)]\s*(.+)$/);
+  if(m&&m[1].toUpperCase().charCodeAt(0)-65===n+res.length)res.push(m[2].replace(/^[○◯◦●■□☐☑✓•·]\s*/u,'').trim());
+  else if(res.length)res[res.length-1]+=' '+p;else return null}
+ return res.length?res:null}
+
+/* bagian soal: "A. Pilihan Ganda", "B. Uraian", "C. Benar atau Salah", "D. Menjodohkan" */
+const SECRE=/^(?:(?:bagian|part)\s+)?(?:(?:[A-Ea-e]|[IVXivx]{1,4})\s*[.):\-–—]\s*)?(pilihan\s+ganda(?:\s+kompleks)?|pilihan\s+majemuk|kotak\s+centang|uraian|esai|essay|isian(?:\s+singkat)?|benar\s*(?:atau|\/|-|dan)?\s*salah|menjodohkan|mencocokkan|pasangkan)\b[^\n]{0,40}$/i;
+function secType(l){
+ if(/^\d/.test(l)||l.length>70)return null;
+ const m=l.match(SECRE);if(!m)return null;
+ const k=m[1].toLowerCase();
+ return /benar/.test(k)?'bs':/menjodohkan|mencocokkan|pasangkan|kompleks|majemuk|centang/.test(k)?'cb':/uraian|esai|essay|isian/.test(k)?'ur':'pg'}
+const BSL=/^(?:jawab(?:an)?\s*:?\s*)?(?:benar|salah)(?:\s*[\/|,\-]?\s*(?:benar|salah))?\s*$/i;
+const BLANK=/\s*\bjawab(?:an)?\s*:?\s*[.…_·\-–—\s]{3,}$/i;
+function ltrs(s){return s.split(/\s*(?:[,;&\/]|\bdan\b)\s*/i).map(x=>x.trim().toLowerCase()).filter(Boolean)}
+function bsIdx(r){return /^(b|benar|t|true)$/.test(r)?0:/^(s|salah|f|false)$/.test(r)?1:-1}
+function keyIdx(r,q){if(q.bs)return bsIdx(r);return /^[a-j]$/.test(r)?r.charCodeAt(0)-97:-1}
+
+function parseSoal(t){
+ const lines=t.replace(/\r/g,'').split('\n').map(s=>s.replace(BIDI,'').replace(/\s+/g,' ').trim()).filter(Boolean);
+ if(lines.some(l=>isTan(l)||isCen(l)))return parseGF(lines);
+ const qs=[],KB={},KG={},RB={},RG={};let cur=null,last=null,kb=false,lastN=0,pend=[],pm=false,sec=0,st='pg',rs=false,ksec=0,cr=null;
+ const fin=()=>{if(cur){cur.q=cur.q.trim();
+   if(!cur.bs){
+    if(st==='bs'&&!cur.o.length){cur.o=['Benar','Salah'];cur.y='pg';cur.bs=1}
+    else if(st==='cb'&&cur.o.length>=2)cur.y='cb'}
+   qs.push(cur)}cur=null;last=null};
+ const put=(M,G,s,n,v)=>{(M[s]=M[s]||{})[n]=v;G[n]=v};
+ for(let l of lines){
+  /* blok kunci jawaban */
+  if(!kb&&(/^kunci(?:\s+jawaban)?(?:\s+dan\s+(?:pembahasan|penjelasan))?\s*:?\s*$/i.test(l)||(/^jawaban\s*:?\s*$/.test(l)&&l===l.toUpperCase()))){fin();kb=true;continue}
+  if(kb){
+   if(secType(l)){ksec++;cr=null;continue}
+   let m=l.match(/^(\d{1,3})\s*[.:)\-=]\s*([A-Ja-j](?:\s*(?:[,;&\/]|\bdan\b)\s*[A-Ja-j])*)\s*$/i);
+   if(m){put(KB,KG,ksec,+m[1],ltrs(m[2]));cr=null;continue}
+   const tk=l.split(/\s*[|;,]\s*|\s{2,}|\s(?=\d{1,3}\s*[.:)\-=]?\s*[A-Za-z]+\b)/).filter(Boolean),P=/^(\d{1,3})\s*[.:)\-=]?\s*(benar|salah|true|false|[A-Za-z])$/i;
+   if(tk.length&&tk.every(x=>P.test(x))){tk.forEach(x=>{const z=x.match(P);put(KB,KG,ksec,+z[1],[z[2].toLowerCase()])});cr=null;continue}
+   m=l.match(/^(\d{1,3})\s*[.)]\s*(\S.{7,})$/);
+   if(m){cr={s:ksec,n:+m[1],t:m[2]};put(RB,RG,ksec,cr.n,cr.t);continue}
+   if(cr&&!/^bahasa\s+indonesia.*halaman/i.test(l)){cr.t+=' '+l;put(RB,RG,cr.s,cr.n,cr.t)}
+   continue}
+  l=l.replace(BLANK,'').trim();if(!l||/^[.…_·\-–—\s]{4,}$/.test(l))continue;
+  /* kunci di bawah soal */
+  let m;
+  if(cur&&(m=l.match(/^(?:kunci|jawaban)(?: jawaban)?\s*[:=]\s*([A-Ja-j](?:\s*(?:[,;&]|\bdan\b)\s*[A-Ja-j])*)\s*$/i))){cur.ik=ltrs(m[1]);continue}
+  /* petunjuk */
+  if(/^petunjuk\b/i.test(l)){fin();pend=[];pm=false;continue}
+  /* judul bagian */
+  const s2=secType(l);
+  if(s2){fin();pend=[];pm=false;sec++;st=s2;rs=true;continue}
+  const qm=qStart(l,rs&&/^1\s*[.)]/.test(l)?0:lastN,cur&&cur.o.length>=2);
+  if(qm){fin();lastN=qm.n;rs=false;cur={n:qm.n,sec,q:(pend.length?pend.join('\n')+'\n\n':'')+qm.rest,o:[],k:0,y:'ur',hk:0};pend=[];pm=false;last='q';continue}
+  if(/^bab\s+([ivxlc]+|\d+)\s*[:.\-–—]/i.test(l)){fin();pend=[];pm=false;continue}
+  if((!cur||cur.o.length>=2)&&!pm&&/^(bacalah|simak|simaklah|perhatikan|cermati|amati)\b(?!.*\b(setiap|teliti|petunjuk)\b).*\b(soal|nomor|berikut)/i.test(l)){fin();pend=[l];pm=true;continue}
+  if(pm){pend.push(l);continue}
+  if(cur){
+   /* benar / salah */
+   if(BSL.test(l.replace(/^[○◯◦●■□☐☑✓•·\[\]\s]+/,''))&&(cur.bs||st==='bs'||/^jawab/i.test(l))){cur.o=['Benar','Salah'];cur.y='pg';cur.bs=1;last='bs';continue}
+   const op=takeOpts(l,cur.o.length);
+   if(op){op.forEach(o=>cur.o.push(o));cur.y='pg';last='o';continue}
+   if(last==='o')cur.o[cur.o.length-1]+=' '+l;else cur.q+=' '+l}
+ }
+ fin();
+ const kv=(M,G,q)=>{const a=M[q.sec];return a&&a[q.n]!==undefined?a[q.n]:G[q.n]};
+ qs.forEach(q=>{
+  if(/\s*\[(centang|dropdown)\]$/i.test(q.q)&&q.o.length>1){q.y=/centang/i.test(q.q)?'cb':'dd';q.q=q.q.replace(/\s*\[(centang|dropdown)\]$/i,'')}
+  if(q.o.length===1&&!q.bs){q.q+=' A. '+q.o[0];q.o=[];q.y='ur'}
+  if(q.y==='ur'){const r=kv(RB,RG,q);if(r&&typeof r==='string')q.r=r;return}
+  const v=q.ik||kv(KB,KG,q);if(!Array.isArray(v)||q.hk)return;
+  if(q.y==='cb'){const ks=[...new Set(v.map(r=>keyIdx(r,q)).filter(j=>j>=0&&j<q.o.length))].sort((a,b)=>a-b);if(ks.length){q.ks=ks;q.hk=1}}
+  else{const j=keyIdx(v[0],q);if(j>=0&&j<q.o.length){q.k=j;q.hk=1}}
+ });
+ return qs}
+/*PURE-END*/
+/* ===== PEMBACA SEMUA JENIS FILE + IMPOR LEWAT LINK ===== */
+let PT_TITLE='',SRC_NAME='';
+const UE=m=>{const e=new Error(m);e.user=1;return e};
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js',
+ MAMJS='https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
+ ZIPJS='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+ XLSJS='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+const needLib=(u,g)=>window[g]?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src=u;s.onload=()=>window[g]?ok():no('lib');s.onerror=()=>no('lib');document.head.appendChild(s)});
+const errMsg=x=>x&&x.user?x.message:x==='lib'?'Pembaca file gagal dimuat (butuh internet). Periksa koneksi lalu coba lagi, atau salin teks soal lalu tempel di kolom teks di atas.':'Gagal membaca ('+((x&&(x.message||x.code))||x)+'). Salin teks soal dari file lalu tempel di kolom teks di atas.';
+
+/* kenali jenis file dari isinya, bukan dari nama */
+function sniff(buf){
+ const u=new Uint8Array(buf.slice(0,16)),s=String.fromCharCode(...u);
+ if(s.startsWith('%PDF'))return'pdf';
+ if(u[0]===0x89&&s.slice(1,4)==='PNG')return'img';
+ if(u[0]===0xFF&&u[1]===0xD8&&u[2]===0xFF)return'img';
+ if(s.startsWith('GIF8'))return'img';
+ if(s.startsWith('RIFF')&&s.slice(8,12)==='WEBP')return'img';
+ if(s.slice(4,8)==='ftyp'){const b=s.slice(8,12);if(b==='avif')return'img';if(/^(hei|mif1|msf1)/.test(b))return'heic'}
+ if(u[0]===0x50&&u[1]===0x4B&&(u[2]===3||u[2]===5))return'zip';
+ if(u[0]===0xD0&&u[1]===0xCF&&u[2]===0x11&&u[3]===0xE0)return'ole';
+ if(s.startsWith('{\\rtf'))return'rtf';
+ return'text'}
+function decodeText(buf){const u=new Uint8Array(buf);
+ if(u[0]===0xFF&&u[1]===0xFE)return new TextDecoder('utf-16le').decode(u.subarray(2));
+ if(u[0]===0xFE&&u[1]===0xFF)return new TextDecoder('utf-16be').decode(u.subarray(2));
+ try{return new TextDecoder('utf-8',{fatal:true}).decode(u).replace(/^﻿/,'')}
+ catch(e){return new TextDecoder('windows-1252').decode(u)}}
+const isBin=t=>{const s=t.slice(0,4000);return s.length>0&&(s.match(/[\uFFFD\u0000-\u0008\u000E-\u001F]/g)||[]).length/s.length>0.02};
+
+/* tabel (Excel, CSV, tabel Word) -> teks soal bernomor */
+function rowsToText(rows,n0){
+ rows=rows.map(r=>r.map(c=>c==null?'':String(c).replace(/\s+/g,' ').trim())).filter(r=>r.some(c=>c));
+ let n=n0||0;if(!rows.length)return{t:'',n};
+ const H=rows[0].map(c=>c.toLowerCase());
+ let cq=H.findIndex(c=>/^(soal|pertanyaan|question|butir soal|teks soal)\b/.test(c)),hasH=cq>=0,co=[],ck=-1;
+ if(hasH){H.forEach((c,i)=>{if(i===cq)return;
+  if(c&&/^(opsi|pilihan|option|jawaban)?\s*[:.)\-]?\s*([a-j]|\d{1,2})$/.test(c))co.push(i);
+  else if(/^(kunci|jawaban|answer|key)/.test(c))ck=i})}
+ else{const nc=Math.max(...rows.map(r=>r.length));
+  if(nc<=1)return{t:rows.map(r=>r[0]).join('\n'),n};
+  cq=/^\d+[.)]?$/.test(rows[0][0])&&nc>2?1:0;
+  const last=nc-1,kc=rows.filter(r=>/^[A-Ja-j]$/.test(r[last]||'')).length;
+  if(last>cq+2&&kc>=rows.length*0.7)ck=last;
+  for(let i=cq+1;i<(ck>=0?ck:nc);i++)co.push(i)}
+ const out=[];
+ for(const r of rows.slice(hasH?1:0)){
+  const q=(r[cq]||'').replace(/^\d{1,3}\s*[.)]\s+/,'');if(!q)continue;
+  n++;out.push(n+'. '+q);
+  const op=co.map(i=>(r[i]||'').replace(/^[A-Ja-j]\s*[.)]\s+/,'')).filter(Boolean);
+  op.forEach((o,i)=>out.push(String.fromCharCode(65+i)+'. '+o));
+  const kv=ck>=0?(r[ck]||''):'';let kl=null;
+  if(/^[A-Ja-j]$/.test(kv))kl=kv.toUpperCase();
+  else if(/^\d+$/.test(kv)&&+kv>=1&&+kv<=op.length)kl=String.fromCharCode(64+ +kv);
+  else if(kv){const ix=op.findIndex(o=>o.toLowerCase()===kv.toLowerCase());if(ix>=0)kl=String.fromCharCode(65+ix)}
+  if(op.length>1&&kl)out.push('Kunci: '+kl)}
+ return{t:out.join('\n'),n}}
+function wbText(wb){let n=0;const out=[];
+ for(const sn of wb.SheetNames){const r=rowsToText(XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''}),n);if(r.t){out.push(r.t);n=r.n}}
+ return out.join('\n')}
+function parseCSV(t){
+ const f=t.split('\n')[0]||'',tb=f.split('\t').length,sc=f.split(';').length,cm=f.split(',').length,d=tb>sc&&tb>cm?'\t':sc>cm?';':',';
+ const rows=[];let r=[],c='',q=false;
+ for(let i=0;i<t.length;i++){const ch=t[i];
+  if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
+  else if(ch==='"')q=true;
+  else if(ch===d){r.push(c);c=''}
+  else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;r.push(c);rows.push(r);r=[];c=''}
+  else c+=ch}
+ if(c||r.length){r.push(c);rows.push(r)}return rows}
+
+/* HTML, EPUB */
+function htmlText(h){
+ const d=new DOMParser().parseFromString(h,'text/html');
+ d.querySelectorAll('script,style,noscript,svg,template,head').forEach(x=>x.remove());
+ let n0=0;
+ d.querySelectorAll('ol').forEach(ol=>{let dp=0,p=ol.parentElement;while(p){if(/^[OU]L$/.test(p.tagName))dp++;p=p.parentElement}
+  let i=0;for(const li of ol.children){if(li.tagName!=='LI')continue;i++;const lab=dp===0?(++n0)+'. ':String.fromCharCode(64+i)+'. ';
+   if(!/^(\d+|[A-Ja-j])\s*[.)]/.test(li.textContent.trim()))li.prepend(lab)}});
+ d.querySelectorAll('br').forEach(b=>b.replaceWith('\n'));
+ d.querySelectorAll('p,div,li,tr,h1,h2,h3,h4,h5,h6,section,article,header,footer,blockquote,pre,table,ul,ol,dd,dt,label,fieldset,option').forEach(e=>{e.prepend('\n');e.append('\n')});
+ d.querySelectorAll('td,th').forEach(e=>e.append(' '));
+ return (d.body?d.body.textContent:'').split('\n').map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean).join('\n')}
+
+/* RTF */
+function rtfText(s){
+ const out=[],stack=[],SK=/^(fonttbl|colortbl|stylesheet|info|pict|header|footer|themedata|colorschememapping|latentstyles|datastore|listtable|listoverridetable|rsidtbl|generator|xmlnstbl|fldinst|bkmkstart|bkmkend)$/;
+ let skip=0,i=0;
+ while(i<s.length){const c=s[i];
+  if(c==='{'){stack.push(skip);i++;const m=s.slice(i,i+40).match(/^\\(\*\\)?([a-zA-Z]+)/);if(m&&(m[1]||SK.test(m[2])))skip=1;continue}
+  if(c==='}'){skip=stack.pop()||0;i++;continue}
+  if(c==='\\'){const r=s.slice(i,i+40),m=r.match(/^\\([a-zA-Z]+)(-?\d+)? ?/);
+   if(m){i+=m[0].length;const w=m[1];if(skip)continue;
+    if(w==='par'||w==='line'||w==='row'||w==='sect')out.push('\n');
+    else if(w==='tab'||w==='cell')out.push(' ');
+    else if(w==='u'){let n=+m[2];if(n<0)n+=65536;out.push(String.fromCharCode(n));if(s[i]==='?')i++}
+    else if(w==='lquote'||w==='rquote')out.push("'");
+    else if(w==='ldblquote'||w==='rdblquote')out.push('"');
+    else if(w==='endash'||w==='emdash')out.push('-');
+    continue}
+   const h=r.match(/^\\'([0-9a-fA-F]{2})/);if(h){i+=4;if(!skip)out.push(String.fromCharCode(parseInt(h[1],16)));continue}
+   if(!skip&&/[\\{}]/.test(s[i+1]||''))out.push(s[i+1]);i+=2;continue}
+  if(c==='\r'||c==='\n'){i++;continue}
+  if(!skip)out.push(c);i++}
+ return out.join('')}
+
+/* OpenDocument (.odt, .odp) */
+function odfText(xml){
+ const d=new DOMParser().parseFromString(xml,'application/xml'),out=[];let n=0;
+ const pTxt=el=>{let s='';const w=x=>{for(const c of x.childNodes){if(c.nodeType===3)s+=c.nodeValue;else if(c.nodeName==='text:s')s+=' '.repeat(+c.getAttribute('text:c')||1);else if(c.nodeName==='text:tab'||c.nodeName==='text:line-break')s+=' ';else if(c.nodeName!=='text:note')w(c)}};w(el);return s.replace(/\s+/g,' ').trim()};
+ const walk=(kids,dp)=>{for(const c of kids){const t=c.nodeName;
+  if(t==='text:p'||t==='text:h'){const s=pTxt(c);if(s)out.push(s)}
+  else if(t==='text:list'){let i=0;
+   for(const li of c.children){if(li.nodeName!=='text:list-item'&&li.nodeName!=='text:list-header')continue;i++;let first=true;
+    for(const ch of li.children){
+     if(ch.nodeName==='text:p'||ch.nodeName==='text:h'){let s=pTxt(ch);
+      if(s&&first){first=false;if(dp===0){n++;if(!/^\d+\s*[.)]/.test(s))s=n+'. '+s}else if(!/^[A-Ja-j]\s*[.)]/.test(s))s=String.fromCharCode(64+i)+'. '+s}
+      if(s)out.push(s)}
+     else if(ch.nodeName==='text:list')walk([ch],dp+1);
+     else walk([ch],dp)}}}
+  else walk(c.children,dp)}};
+ walk(d.documentElement.children,0);return out.join('\n')}
+
+/* PowerPoint */
+async function pptxText(z){
+ const nm=Object.keys(z.files).filter(x=>/^ppt\/slides\/slide\d+\.xml$/.test(x)).sort((a,b)=>parseInt(a.match(/\d+/g).pop())-parseInt(b.match(/\d+/g).pop())),out=[];
+ for(const f of nm){const d=new DOMParser().parseFromString(await z.file(f).async('string'),'application/xml');
+  for(const p of d.getElementsByTagName('a:p')){let s='';for(const c of p.getElementsByTagName('*')){if(c.nodeName==='a:t')s+=c.textContent;else if(c.nodeName==='a:br')s+=' '}
+   s=s.replace(/\s+/g,' ').trim();if(s)out.push(s)}}
+ return out.join('\n')}
+
+/* format Office lama (.doc): ambil teks perkiraan */
+function oleText(buf){
+ const u=new Uint8Array(buf);let a='';for(let i=0;i<u.length;i+=8192)a+=String.fromCharCode.apply(null,u.subarray(i,i+8192));
+ const b=new TextDecoder('utf-16le').decode(u.subarray(0,u.length&~1)),re=/[\p{L}\p{N}\p{P}\p{Zs}\r\t]{8,}/gu,A=a.match(re)||[],B=b.match(re)||[];
+ const c=(B.join('').length>A.join('').length?B:A).join('\r');
+ return c.split(/[\r\u000b\u0007]+/).map(s=>s.replace(/\s+/g,' ').trim()).filter(s=>/\p{L}{2}/u.test(s)).join('\n')}
+
+/* JSON: hasil skrip Google Form, atau daftar soal umum */
+function jsonToText(j){
+ const goog=!!(j&&!Array.isArray(j)&&Array.isArray(j.qs));
+ const qs=Array.isArray(j)?j:goog?j.qs:Array.isArray(j&&j.questions)?j.questions:Array.isArray(j&&j.soal)?j.soal:null;
+ if(!qs)return null;
+ const g=(o,ks)=>{for(const k of ks)if(o[k]!=null)return o[k]};
+ const out=[];let n=0;
+ for(const it of qs){if(!it||typeof it!=='object')continue;
+  const q=g(it,['q','soal','pertanyaan','question','text','title']);if(!q)continue;
+  let o=g(it,['o','opsi','options','pilihan','choices','answers']);
+  o=Array.isArray(o)?o.map(x=>x&&typeof x==='object'?String(x.text||x.label||x.value||''):String(x)):[];
+  const k=g(it,['k','kunci','key','answer','jawaban','correct','correctAnswer']);
+  n++;out.push(n+'. '+String(q).replace(/\s+/g,' ').trim()+(it.y==='dd'&&o.length>1?' [dropdown]':''));
+  o.forEach((x,i)=>out.push(String.fromCharCode(65+i)+'. '+x));
+  if(o.length>1&&k!=null){let ix=-1;
+   if(typeof k==='number')ix=(goog||(it.k===k&&it.kunci==null&&it.key==null&&it.answer==null))?k:k-1;
+   else if(/^[A-Ja-j]$/.test(String(k).trim()))ix=String(k).trim().toUpperCase().charCodeAt(0)-65;
+   else ix=o.findIndex(x=>x.trim().toLowerCase()===String(k).trim().toLowerCase());
+   if(ix>=0&&ix<o.length)out.push('Kunci: '+String.fromCharCode(65+ix))}}
+ return out.length?{text:out.join('\n'),title:String(j.t||j.title||j.judul||'')}:null}
+
+function jsonSlice(h,i){let d=0,st=false,es=false;for(let k=i;k<h.length;k++){const c=h[k];if(st){if(es)es=false;else if(c==='\\')es=true;else if(c==='"')st=false;continue}if(c==='"')st=true;else if(c==='['||c==='{')d++;else if(c===']'||c==='}'){d--;if(d===0)return h.slice(i,k+1)}}return h.slice(i)}
+/* halaman tampilan Google Form (viewform) memuat seluruh soal di FB_PUBLIC_LOAD_DATA_ */
+let GFQ=null,GFT='';
+/* data Google Form bukan JSON murni: ada elemen kosong ([,,]), escape \x41 dan \' */
+function gfParse(t){try{return JSON.parse(t)}catch(e){}
+ let o='',st=false,lp='';
+ for(let i=0;i<t.length;i++){const c=t[i];
+  if(st){if(c==='\\'){const n=t[i+1];
+    if(n==="'"){o+="'";i++}
+    else if(n==='x'&&/^[0-9a-fA-F]{2}$/.test(t.slice(i+2,i+4))){o+='\\u00'+t.slice(i+2,i+4);i+=3}
+    else{o+=c+(n||'');i++}}
+   else{if(c==='"'){st=false;lp='"'}o+=(c==='\n'||c==='\r'||c==='\t')?' ':c}
+   continue}
+  if(c==='"'){st=true;o+=c;continue}
+  if(/\s/.test(c)){o+=c;continue}
+  if((c===','&&(lp===','||lp==='['))||(c===']'&&lp===','))o+='null';
+  o+=c;lp=c}
+ return JSON.parse(o)}
+function gformText(h){
+ const m=h.match(/FB_PUBLIC_LOAD_DATA_\s*=\s*/),st=m?m.index+m[0].length:/^\s*\[\s*null\s*,\s*\[/.test(h)?h.indexOf('['):-1;if(st<0)return null;
+ let d;try{d=gfParse(jsonSlice(h,st))}catch(x){return null}
+ const items=(d[1]&&d[1][1])||[],out=[],C=s=>String(s==null?'':s).replace(/\s+/g,' ').trim(),
+  IMG=it=>/googleusercontent|gstatic\.com\/(?!images\/branding)/i.test(JSON.stringify(it.slice(5)));
+ let n=0,ctx=[],pic=0,nimg=0,pages=1;const sk={},G=[];
+ const add=(t,o,y,tag)=>{n++;let q=C(t).replace(/^\d{1,3}\s*[.)]\s+/,'');
+  if(ctx.length){const c=ctx.join(' ');ctx=[];q=c+' '+q}
+  if(pic){q='[gambar tidak ikut terbawa] '+q;pic=0;nimg++}
+  o=o.map((x,k)=>x||('[gambar pilihan '+String.fromCharCode(65+k)+']'));G.push({q,o:o.length>1?o:[],y:o.length>1?y:'ur'});
+  out.push(n+'. '+q+(tag||''));o.forEach((x,k)=>out.push(String.fromCharCode(65+k)+'. '+x))};
+ for(const it of items){const t=it[3],ti=C(it[1]),ds=C(it[2]);
+  if(t===8)pages++;
+  if(t===6||t===8||t===11||t===12){if(t===6&&C(ti+' '+ds).length>=60)ctx.push(C(ti+' '+ds));if(t===11||IMG(it))pic=1;if(t===12)sk.video=1;continue}
+  if(IMG(it))pic=1;
+  const a=(it[4]&&it[4][0])||[],raw=a[1]||[],body=ti+(ds?' '+ds:'');
+  if(t===0||t===1){if(ti)add(body,[],'ur');continue}
+  if(t===2||t===3||t===4){if(ti)add(body,raw.map(x=>x[4]?'Lainnya':C(x[0])),t===4?'cb':t===3?'dd':'pg',t===4?' [centang]':t===3?' [dropdown]':'');continue}
+  if(t===5){const o=raw.map(x=>C(x[0])),lb=a[3]||[];if(o.length&&lb[0])o[0]+=' ('+C(lb[0])+')';if(o.length>1&&lb[1])o[o.length-1]+=' ('+C(lb[1])+')';add(body,o,'pg');continue}
+  if(t===7){for(const r of (it[4]||[]))add(ti+' - '+C(r[3]&&r[3][0]),(r[1]||[]).map(x=>C(x[0])),'pg');continue}
+  if(ti&&Array.isArray(raw)&&raw.length>1&&raw.every(x=>Array.isArray(x)&&typeof x[0]==='string')){add(body,raw.map(x=>x[4]?'Lainnya':C(x[0])),'pg');continue}
+  sk[t]=(sk[t]||0)+1}
+ GFQ=G;
+ const nm={9:'tanggal',10:'jam',13:'unggah file'},ns=Object.keys(sk).filter(k=>nm[k]).map(k=>sk[k]+' pertanyaan '+nm[k]),w=['Form berisi '+pages+' halaman dan '+n+' butir soal'];
+ if(nimg)w.push(nimg+' soal memuat gambar yang tidak ikut terbawa (ditandai [gambar...], lengkapi manual)');
+ if(ns.length)w.push(ns.join(', ')+' dilewati');
+ w.push('Link Google Form tidak membawa kunci jawaban: kunci ditandai belum dipilih, isi lewat kolom kunci jawaban atau di editor');
+ GFT=out.join('\n');return{text:GFT,title:String(((d[1]&&d[1][8])||d[3]||'')).replace(/^Formulir tanpa judul$/i,''),warn:w.join('. ')}}
+
+/* satu pintu: byte file -> teks soal (atau penanda "visual" untuk PDF/foto) */
+async function extractText(buf,name,ct){
+ ct=(ct||'').toLowerCase();const e=(((name||'').match(/\.([a-z0-9]+)$/i)||[])[1]||'').toLowerCase(),kind=sniff(buf);
+ if(kind==='pdf'||kind==='img')return{visual:kind};
+ if(kind==='heic')throw UE('Foto berformat HEIC belum bisa dibaca browser. Simpan atau ekspor sebagai JPG atau PNG lalu coba lagi.');
+ if(kind==='zip'){await needLib(ZIPJS,'JSZip');const z=await JSZip.loadAsync(buf),nm=Object.keys(z.files);
+  if(nm.includes('word/document.xml')){await needLib(MAMJS,'mammoth');return{text:html2t((await mammoth.convertToHtml({arrayBuffer:buf})).value)}}
+  if(nm.includes('xl/workbook.xml')){await needLib(XLSJS,'XLSX');return{text:wbText(XLSX.read(buf,{type:'array'}))}}
+  if(nm.some(x=>/^ppt\/slides\/slide\d+\.xml$/.test(x)))return{text:await pptxText(z)};
+  if(nm.includes('content.xml')){const mt=z.file('mimetype')?await z.file('mimetype').async('string'):'';
+   if(/spreadsheet/.test(mt)){await needLib(XLSJS,'XLSX');return{text:wbText(XLSX.read(buf,{type:'array'}))}}
+   return{text:odfText(await z.file('content.xml').async('string'))}}
+  const hs=nm.filter(x=>/\.x?html?$/i.test(x)&&!/(^|\/)(nav|toc)/i.test(x)).sort();
+  if(hs.length&&nm.includes('mimetype')){const o=[];for(const h of hs)o.push(htmlText(await z.file(h).async('string')));return{text:o.join('\n')}}
+  throw UE('Arsip ZIP ini tidak berisi dokumen soal yang dikenali. Ekstrak dulu lalu pilih file soalnya.')}
+ if(kind==='ole'){
+  if(/^(xls|xlt|xlsb)$/.test(e)){await needLib(XLSJS,'XLSX');return{text:wbText(XLSX.read(buf,{type:'array'}))}}
+  const t=oleText(buf);if(!t.trim())throw UE('File Office lama ini tidak bisa dibaca. Simpan ulang sebagai .docx atau PDF lalu coba lagi.');
+  return{text:t,warn:'File Office lama (.'+(e||'doc')+') hanya terbaca perkiraan, jadi urutan dan isinya perlu diperiksa. Sebaiknya simpan sebagai .docx atau PDF'}}
+ if(kind==='rtf')return{text:rtfText(decodeText(buf))};
+ const t=decodeText(buf);
+ if(/^(csv|tsv|tab)$/.test(e)||/csv|tab-separated/.test(ct))return{text:rowsToText(parseCSV(t),0).t};
+ if(/html|xml/.test(ct)||/^(html?|xhtml|mht|mhtml)$/.test(e)||/^\s*(<!doctype html|<html|<\?xml|<head|<body)/i.test(t.slice(0,300))){
+  const g=gformText(t);if(g)return g;
+  if(/FB_PUBLIC_LOAD_DATA_|freebirdFormviewer/.test(t))throw UE('Isi Google Form ini tidak terbaca utuh (formnya mungkin sudah ditutup atau datanya terpotong). Coba lagi, atau pakai cara manual view-source.');
+  if(/accounts\.google\.com|ServiceLogin/.test(t)&&/sign.?in|masuk/i.test(t))throw UE('Link ini meminta login Google. Ubah pembagiannya menjadi "Siapa saja yang memiliki link", lalu coba lagi.');
+  return{text:htmlText(t)}}
+ if(/^\s*[\[{]/.test(t)){try{const r=jsonToText(JSON.parse(t));if(r)return r}catch(x){}}
+ if(isBin(t))throw UE('Format file ini tidak dikenali sebagai dokumen soal. Simpan sebagai PDF, Word (.docx), atau teks lalu coba lagi.');
+ return{text:t}}
+
+/* tampilkan hasil ke kolom teks (PDF/foto lanjut ke pembaca visual) */
+async function present(x,f,buf){
+ if(x.visual){const isP=x.visual==='pdf';let g=f;
+  if(isP&&!isPdfF(f))g=new File([buf],f.name+'.pdf',{type:'application/pdf'});
+  else if(!isP&&!isImgF(f))g=new File([buf],f.name+'.jpg',{type:'image/jpeg'});
+  curFile=g;return readVisual(g,false,false)}
+ curFile=f;const t=(x.text||'').trim();PT_TITLE=x.title||'';$('#pt').value=t;
+ setR(t?'File terbaca'+(x.warn?'. '+x.warn:'')+'. Periksa teks di atas, perbaiki jika perlu, lalu tekan Impor soal.':'File ini kosong atau tidak berisi teks soal.',t?(x.warn?'var(--mu)':'var(--ok)'):'var(--dg)')}
+async function readFile(f){
+ PT_TITLE='';SRC_NAME=f.name.replace(/\.[^.]+$/,'');setR('Membaca '+f.name+'…');
+ try{const buf=await f.arrayBuffer();await present(await extractText(buf,f.name,f.type||''),f,buf)}
+ catch(x){setR(errMsg(x),'var(--dg)')}}
+
+/* impor lewat link */
+function linkPlan(raw){
+ let url;try{url=new URL(raw)}catch(e){return null}
+ if(!/^https?:$/.test(url.protocol))return null;
+ const h=url.hostname.replace(/^www\./,''),p=url.pathname;let m;
+ if(h==='docs.google.com'){
+  if(m=p.match(/^\/document\/(?:u\/\d+\/)?d\/([\w-]+)/))return{u:`https://docs.google.com/document/d/${m[1]}/export?format=docx`,name:'google-docs.docx',title:'Soal dari Google Docs'};
+  if(m=p.match(/^\/spreadsheets\/(?:u\/\d+\/)?d\/([\w-]+)/)){const gid=(url.hash.match(/gid=(\d+)/)||url.search.match(/gid=(\d+)/)||[])[1];
+   return gid?{u:`https://docs.google.com/spreadsheets/d/${m[1]}/export?format=csv&gid=${gid}`,name:'google-sheets.csv',title:'Soal dari Google Sheets'}:{u:`https://docs.google.com/spreadsheets/d/${m[1]}/export?format=xlsx`,name:'google-sheets.xlsx',title:'Soal dari Google Sheets'}}
+  if(m=p.match(/^\/presentation\/(?:u\/\d+\/)?d\/([\w-]+)/))return{u:`https://docs.google.com/presentation/d/${m[1]}/export/pptx`,name:'google-slides.pptx',title:'Soal dari Google Slides'};
+  if(m=p.match(/^\/forms\/(?:u\/\d+\/)?d\/e\/([\w-]+)/))return{u:`https://docs.google.com/forms/d/e/${m[1]}/viewform`,name:'google-form.html',title:''};
+  if(/^\/forms\/(?:u\/\d+\/)?d\/[\w-]+/.test(p))return{err:'Ini link editor Google Form (butuh login). Pakai link responden dari tombol Kirim, yang berbentuk docs.google.com/forms/d/e/…/viewform atau forms.gle/…. Kalau ingin kunci jawaban ikut terbawa, pakai kartu Impor dari Google Form di atas.'}}
+ if(h==='forms.gle')return{u:raw,name:'google-form.html',title:''};
+ if(h==='drive.google.com'||h==='drive.usercontent.google.com'){
+  const id=(p.match(/\/(?:file\/d|d)\/([\w-]+)/)||[])[1]||url.searchParams.get('id');
+  if(/\/drive\/folders\//.test(p))return{err:'Link folder Google Drive tidak bisa dibaca. Buka satu file soal, bagikan, lalu tempel link file itu.'};
+  if(id)return{u:`https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t`,name:'file-drive',title:'Soal dari Google Drive'}}
+ if(h==='dropbox.com'){url.searchParams.set('dl','1');return{u:url.href,name:decodeURIComponent(p.split('/').pop()||'dropbox'),title:''}}
+ if(h==='github.com'&&(m=p.match(/^\/([^/]+)\/([^/]+)\/blob\/(.+)$/)))return{u:`https://raw.githubusercontent.com/${m[1]}/${m[2]}/${m[3]}`,name:decodeURIComponent(m[3].split('/').pop()),title:''};
+ let nm='';try{nm=decodeURIComponent(p.split('/').filter(Boolean).pop()||'')}catch(e){}
+ return{u:url.href,name:nm||h,title:''}}
+async function fetchBuf(u,useProxy,signal,needForm){
+ let host='';try{host=new URL(u).hostname}catch(e){}
+ const google=/(^|\.)(google\.com|forms\.gle|googleusercontent\.com)$/.test(host),e=encodeURIComponent(u),T=[];
+ if(!google)T.push({n:'langsung',u});
+ if(useProxy)T.push({n:'corsproxy.io',u:'https://corsproxy.io/?url='+e},{n:'allorigins',u:'https://api.allorigins.win/raw?url='+e},{n:'codetabs',u:'https://api.codetabs.com/v1/proxy?quest='+e},{n:'thingproxy',u:'https://thingproxy.freeboard.io/fetch/'+u},{n:'corsproxy.org',u:'https://corsproxy.org/?'+e},{n:'allorigins-json',u:'https://api.allorigins.win/get?url='+e,json:1});
+ const MAN=' Cara manual: (1) buka link itu di browser, ketik view-source: di depan alamatnya, pilih semua teks, salin, tempel di kolom "Teks soal yang terbaca" lalu tekan Impor soal; atau (2) cetak form ke PDF lalu pilih file PDF-nya di kolom File soal; atau (3) pakai kode Salin soal dari browser (kartu "Cara paling pasti" di halaman ini), yang tidak memakai perantara.';
+ if(!T.length)throw UE('Situs Google tidak bisa diambil langsung dari browser, dan opsi perantara publik sedang mati. Nyalakan opsinya, atau pakai cara manual.'+MAN);
+ const fails=[];
+ for(const t of T){
+  const c=new AbortController(),tm=setTimeout(()=>c.abort(),15000),on=()=>c.abort();signal.addEventListener('abort',on);
+  try{const r=await fetch(t.u,{signal:c.signal,redirect:'follow',credentials:'omit'});
+   if(!r.ok){fails.push(t.n+' HTTP '+r.status);continue}
+   let buf,ct=r.headers.get('content-type')||'';
+   if(t.json){const j=await r.json();if(!j||typeof j.contents!=='string'||!j.contents){fails.push(t.n+' kosong');continue}buf=new TextEncoder().encode(j.contents).buffer;ct='text/html'}
+   else buf=await r.arrayBuffer();
+   if(buf.byteLength>40*1024*1024)throw UE('File di link ini lebih dari 40 MB. Unduh lalu pilih dari perangkat Anda.');
+   if(!buf.byteLength){fails.push(t.n+' kosong');continue}
+   if(needForm&&!gformText(decodeText(buf))){fails.push(t.n+' data form tidak terbaca');continue}
+   return{buf,ct,via:t.n}}
+  catch(x){if(signal.aborted){const a=new Error('abort');a.name='AbortError';throw a}if(x&&x.user)throw x;fails.push(t.n+(x&&x.name==='AbortError'?' waktu habis':' diblokir'))}
+  finally{clearTimeout(tm);signal.removeEventListener('abort',on)}}
+ throw UE('Link tidak bisa diambil ('+fails.join('; ')+'). Pastikan link bisa dibuka tanpa login Google dan formnya masih menerima jawaban.'+MAN)}
+let linkCtl=null;
+async function readLink(){
+ const b=$('#lkb');if(linkCtl){linkCtl.abort();return}
+ const raw=$('#lk').value.trim();
+ if(!raw){setR('Tempel link soal dulu.','var(--dg)');return}
+ const pl=linkPlan(raw);
+ if(!pl){setR('Link tidak valid. Link harus diawali https://','var(--dg)');return}
+ if(pl.err){setR(pl.err,'var(--dg)');return}
+ linkCtl=new AbortController();b.textContent='Batalkan';PT_TITLE='';SRC_NAME=pl.title||'';
+ try{setR('Mengambil isi link…');
+  const g=await fetchBuf(pl.u,$('#px').checked,linkCtl.signal,pl.name==='google-form.html');
+  if(!pl.title)SRC_NAME=pl.name.replace(/\.[^.]+$/,'');
+  const f=new File([g.buf],pl.name,{type:(g.ct.split(';')[0]||'').trim()}),x=await extractText(g.buf,pl.name,g.ct);
+  await present(x,f,g.buf)}
+ catch(x){setR(x&&x.name==='AbortError'?'Pengambilan link dibatalkan.':errMsg(x),x&&x.name==='AbortError'?'var(--mu)':'var(--dg)')}
+ finally{linkCtl=null;b.textContent='Ambil dari link'}}
+
+const BTN='Baca ulang dengan OCR';
+let curFile=null,ctl=null,tessW=null;
+const setR=(m,c)=>{const r=$('#pr');r.style.color=c||'var(--mu)';r.textContent=m};
+const PDFW='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+const isPdfF=f=>/\.pdf$/i.test(f.name)||f.type==='application/pdf';
+const isImgF=f=>/\.(png|jpe?g|webp|bmp|gif)$/i.test(f.name)||/^image\//.test(f.type);
+const cancelErr=()=>{const e=new Error('cancel');e.code='cancelled';return e};
+const killTess=()=>{if(tessW){try{tessW.terminate()}catch(e){}tessW=null}};
+
+/* mesin baca: pengaturan tersimpan di perangkat */
+try{$('#ok').value=localStorage.getItem('ujian-key')||'';$('#oe').value=localStorage.getItem('ujian-eng')||'auto'}catch(e){}
+const syncOe=()=>{$('#okw').classList.toggle('hide',$('#oe').value!=='api');try{localStorage.setItem('ujian-eng',$('#oe').value)}catch(e){}};
+$('#oe').onchange=syncOe;syncOe();
+$('#ok').oninput=e=>{try{localStorage.setItem('ujian-key',e.target.value.trim())}catch(x){}};
+
+const OCRP=`Gambar terlampir adalah halaman-halaman soal ujian dari Google Form yang dicetak ke PDF. Salin semua soal pilihan ganda dan uraian sesuai urutan baca, hanya teks biasa tanpa komentar dan tanpa markdown.
+Format tiap soal:
+NOMOR. teks soal dalam satu baris
+A. pilihan pertama
+B. pilihan kedua
+dan seterusnya sesuai jumlah pilihan.
+Aturan:
+- Pakai nomor yang tercetak di form. Salin kata-kata persis, termasuk salah ketik.
+- Soal yang teksnya beberapa baris tulis dalam SATU baris. Pernyataan bernomor di dalam soal tulis sebagai (1) ... (2) ... di baris yang sama, jangan di awal baris.
+- Tulisan Arab (ayat, lafal), termasuk yang ada di dalam gambar, tulis ulang sebagai teks Arab berharakat di baris soal. Gambar tanpa tulisan jelaskan singkat dalam kurung siku, misalnya [gambar: peta].
+- Jika soal berupa kotak centang (Centang semua yang sesuai), akhiri baris soal dengan [centang]. Jika dropdown, akhiri dengan [dropdown].
+- Soal tanpa pilihan jawaban (jawaban singkat atau paragraf) cukup baris nomor dan soalnya.
+- Lewati isian identitas (nama, nomor peserta, kelas, ruang), judul bagian, petunjuk umum, tulisan poin, tanda bintang, serta header dan footer halaman.`;
+
+const blob2b64=b=>new Promise(ok=>{const fr=new FileReader();fr.onload=()=>ok(String(fr.result).split(',')[1]);fr.readAsDataURL(b)});
+async function apiRead(key,blobs,signal){
+ const content=[];
+ for(const b of blobs)content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:await blob2b64(b)}});
+ content.push({type:'text',text:OCRP});
+ const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal,
+  headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+  body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:8000,messages:[{role:'user',content}]})});
+ const j=await res.json().catch(()=>({}));
+ if(!res.ok){const er=new Error((j.error&&j.error.message)||('HTTP '+res.status));er.code=res.status===401?'bad_key':res.status===429?'rate_limited':'api';throw er}
+ return (j.content||[]).map(c=>c.text||'').join('')}
+function loadTess(){
+ if(window.Tesseract)return Promise.resolve();
+ return new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';s.onload=ok;s.onerror=()=>no('lib');document.head.appendChild(s)})}
+
+/* teks bawaan PDF, dikelompokkan per baris lengkap dengan posisinya */
+async function pageText(d,p){
+ const pg=await d.getPage(p),vp=pg.getViewport({scale:1}),c=await pg.getTextContent();
+ const its=c.items.filter(it=>it.str&&it.str.trim()).map(it=>({x:it.transform[4],b:it.transform[5],h:Math.abs(it.height||it.transform[3])||10,s:it.str.trim()})).sort((a,b)=>b.b-a.b||a.x-b.x);
+ const rows=[];its.forEach(it=>{const r=rows[rows.length-1];if(r&&Math.abs(r.b-it.b)<=Math.max(2,it.h*0.4))r.t.push(it);else rows.push({b:it.b,h:it.h,t:[it]})});
+ return{chars:its.reduce((n,i)=>n+i.s.length,0),lines:rows.map(r=>{r.t.sort((a,b)=>a.x-b.x);
+  return{t:r.t.map(z=>z.s).join(' '),x:r.t[0].x/vp.width,y0:(vp.height-r.b-r.h)/vp.height,y1:(vp.height-r.b)/vp.height}})}}
+
+/* kontras otomatis supaya foto atau scan redup tetap terbaca */
+function prep(cv){
+ try{const g=cv.getContext('2d'),im=g.getImageData(0,0,cv.width,cv.height),d=im.data,h=new Uint32Array(256);
+  for(let i=0;i<d.length;i+=4){const v=(d[i]*299+d[i+1]*587+d[i+2]*114)/1000|0;d[i]=d[i+1]=d[i+2]=v;h[v]++}
+  const n=d.length/4;let a=0,lo=0,hi=255;for(let v=0;v<256;v++){a+=h[v];if(a>n*0.01){lo=v;break}}
+  a=0;for(let v=255;v>=0;v--){a+=h[v];if(a>n*0.01){hi=v;break}}
+  if(hi-lo>30&&(hi-lo<200||lo>25)){const k=255/(hi-lo);for(let i=0;i<d.length;i+=4){const v=Math.max(0,Math.min(255,(d[i]-lo)*k));d[i]=d[i+1]=d[i+2]=v}}
+  g.putImageData(im,0,0)}catch(e){}return cv}
+async function canvasFor(src,i,W){
+ if(src.d){const pg=await src.d.getPage(i+1),v0=pg.getViewport({scale:1}),vp=pg.getViewport({scale:Math.min(4,Math.max(1.2,W/v0.width))}),cv=document.createElement('canvas');
+  cv.width=vp.width;cv.height=vp.height;const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,cv.width,cv.height);
+  await pg.render({canvasContext:g,viewport:vp}).promise;return cv}
+ const bm=await createImageBitmap(src.f),sc=bm.width>2600?2600/bm.width:Math.min(3,Math.max(1,W/bm.width)),cv=document.createElement('canvas');
+ cv.width=Math.round(bm.width*sc);cv.height=Math.round(bm.height*sc);const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,cv.width,cv.height);g.drawImage(bm,0,0,cv.width,cv.height);return cv}
+function tessLines(D,cv){
+ let L=D.lines;
+ if(!L&&D.blocks){L=[];D.blocks.forEach(b=>(b.paragraphs||[]).forEach(p=>(p.lines||[]).forEach(l=>L.push(l))))}
+ if(!L)L=String(D.text||'').split('\n').filter(s=>s.trim()).map(t=>({text:t}));
+ return L.filter(l=>l.text&&l.text.trim()).map(l=>l.bbox?{t:l.text,x:l.bbox.x0/cv.width,y0:l.bbox.y0/cv.height,y1:l.bbox.y1/cv.height,c:l.confidence}:{t:l.text})}
+
+/* membaca file visual (PDF atau foto): teks bawaan dulu, halaman tanpa teks otomatis di-OCR */
+async function readVisual(f,force,manual){
+ if(ctl)return;
+ const b=$('#ocr');ctl=new AbortController();b.textContent='Batalkan pembacaan';
+ const pages=[];let usedLocal=false,nOcr=0;
+ const build=()=>{const t=linesToText(pages.map(p=>p.lines));return usedLocal?fixOcr(t):t};
+ try{
+  let src={f},d=null;
+  if(isPdfF(f)){
+   await needLib(PDFJS,'pdfjsLib').catch(()=>{throw 'lib'});
+   pdfjsLib.GlobalWorkerOptions.workerSrc=PDFW;
+   d=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;src={d,f};
+   for(let p=1;p<=d.numPages;p++){if(ctl.signal.aborted)throw cancelErr();if(d.numPages>3)setR('Membaca teks halaman '+p+' dari '+d.numPages+'…');pages.push(await pageText(d,p))}}
+  else pages.push({lines:[],chars:0,img:true});
+  const need=pages.map((pg,i)=>(force||pg.img||pg.chars<25)?i:-1).filter(i=>i>=0);
+  if(need.length){
+   const key=$('#ok').value.trim();let eng=$('#oe').value,cl=null,lim=null;
+   if(eng==='auto'){
+    if(manual){cl=window.claude&&claude.use?await claude.use('sample').catch(()=>null):null;lim=cl?await cl.limits().catch(()=>null):null;
+     eng=cl&&lim&&lim.images?'claude':(key?'api':'local')}
+    else eng='local'}
+   if(eng==='api'&&!key){$('#okw').classList.remove('hide');throw {code:'nokey'}}
+   if(eng==='claude'&&!cl){eng='local'}
+   if(eng==='local'){
+    setR('Memuat mesin OCR (unduhan pertama sekitar 20 MB, setelah itu cepat)…');
+    await loadTess();if(ctl.signal.aborted)throw cancelErr();
+    tessW=await Tesseract.createWorker('ind+ara');usedLocal=true;
+    for(let k=0;k<need.length;k++){
+     if(ctl.signal.aborted)throw cancelErr();
+     const i=need[k];setR('OCR di perangkat: halaman '+(k+1)+' dari '+need.length+'…');
+     const cv=prep(await canvasFor(src,i,1700)),res=await tessW.recognize(cv);
+     pages[i].lines=tessLines(res.data,cv);pages[i].chars=99;nOcr++;$('#pt').value=build()}
+    killTess()}
+   else{
+    const per=eng==='claude'?Math.max(1,Math.min((lim&&lim.images&&lim.images.maxCount)||4,4)):4;
+    for(let s=0;s<need.length;s+=per){
+     if(ctl.signal.aborted)throw cancelErr();
+     const grp=need.slice(s,s+per),blobs=[];
+     setR('Menyiapkan halaman '+(s+1)+' sampai '+(s+grp.length)+' dari '+need.length+'…');
+     for(const i of grp){const cv=await canvasFor(src,i,1100);blobs.push(await new Promise(ok=>cv.toBlob(ok,'image/jpeg',0.72)))}
+     setR('Claude membaca halaman '+(s+1)+' sampai '+(s+grp.length)+' dari '+need.length+'…');
+     const txt=eng==='claude'?(await cl(OCRP,{images:blobs,signal:ctl.signal,cache:false})).text:await apiRead(key,blobs,ctl.signal);
+     pages[grp[0]].lines=txt.split('\n').map(t=>t.trim()).filter(Boolean).map(t=>({t}));grp.forEach(i=>{pages[i].chars=99});nOcr+=grp.length;$('#pt').value=build()}}}
+  const out=build();$('#pt').value=out.trim();
+  if(!out.trim())setR('Tidak ada teks yang berhasil dibaca dari file ini. Coba tekan Baca ulang dengan OCR, atau pakai foto yang lebih jelas.','var(--dg)');
+  else setR((nOcr?'File dibaca dengan OCR ('+nOcr+' halaman). Hasil OCR bisa keliru, jadi periksa teks di atas (nomor soal, pilihan, tulisan Arab), perbaiki jika perlu, lalu tekan Impor soal.':'File terbaca. Periksa teks di atas, perbaiki jika perlu, lalu tekan Impor soal.'),'var(--ok)')}
+ catch(x){
+  try{$('#pt').value=build()}catch(e){}
+  const c=x&&x.code,n=x&&x.name;
+  setR(c==='cancelled'||n==='AbortError'?'Pembacaan dibatalkan. Teks yang sudah terbaca tetap ada di kolom.':c==='nokey'?'Isi kunci API Anthropic dulu, atau pilih OCR di perangkat.':c==='not_granted'?'Izin ke Claude ditolak, jadi PDF tidak bisa dibaca.':c==='rate_limited'?'Terlalu banyak permintaan. Tunggu sebentar lalu coba lagi, teks yang sudah terbaca tetap ada.':c==='bad_key'?'Kunci API ditolak. Periksa kembali kunci Anda.':x==='lib'?'Pembaca PDF atau mesin OCR gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.':'Gagal membaca file ('+((x&&(x.message||c))||x)+'). Teks yang sudah terbaca tetap ada di kolom.','var(--dg)')}
+ finally{ctl=null;killTess();b.textContent=BTN}}
+
+$('#pfile').addEventListener('change',e=>{curFile=e.target.files[0]||null;if(curFile)readFile(curFile)});
+$('#ocr').onclick=()=>{
+ if(ctl){ctl.abort();killTess();return}
+ if(!curFile||!(isPdfF(curFile)||isImgF(curFile))){setR('Pilih file PDF atau foto dulu di kolom File soal.','var(--dg)');return}
+ readVisual(curFile,true,true)};
+
+$('#ak').onclick=()=>{const r=$('#akr'),t=$('#kk').value.trim();r.style.color='var(--dg)';
+ if(!t){r.textContent='Tempel kunci jawabannya dulu.';return}
+ const ks={};
+ if(!/\d/.test(t)){const L=t.toUpperCase().match(/[A-J]/g)||[];L.forEach((c,i)=>{ks[i+1]=c.charCodeAt(0)-65})}
+ else for(const m of t.matchAll(/(\d{1,3})\s*[.:)\-=]?\s*([A-Ja-j])(?![A-Za-z])/g))ks[+m[1]]=m[2].toUpperCase().charCodeAt(0)-65;
+ let ok=0,skip=[];
+ Object.keys(ks).forEach(n=>{const q=E.qs[n-1];if(!q)return;
+  if(q.y==='ur'||q.y==='cb'||ks[n]>=q.o.length){skip.push(n);return}
+  q.k=ks[n];ok++});
+ if(!ok){r.textContent='Tidak ada kunci yang cocok. Tulis seperti 1.B 2.D 3.A atau huruf berurutan BDAC.';return}
+ draw();r.style.color='var(--ok)';
+ r.textContent=ok+' kunci diterapkan.'+(skip.length?' Dilewati (uraian, kotak centang, atau huruf di luar pilihan): soal '+skip.join(', ')+'.':'')+(ok<E.qs.filter(q=>q.y!=='ur'&&q.y!=='cb').length?' Masih ada soal yang belum ada kuncinya.':'')};
+$('#pi').onclick=()=>{const r=$('#pr');r.style.color='var(--dg)';
+ {const v=$('#pt').value;if(/FB_PUBLIC_LOAD_DATA_|^\s*\[\s*null\s*,\s*\[/.test(v)){const g=gformText(v);if(g&&g.text){$('#pt').value=g.text;PT_TITLE=g.title||PT_TITLE}}else if(/^\s*(<!doctype html|<html|<head|<body)/i.test(v))$('#pt').value=htmlText(v);else if(/^https?:\/\/\S+$/.test(v.trim())){$('#lk').value=v.trim();$('#pt').value='';readLink();return}}
+ const raw=(GFQ&&$('#pt').value===GFT)?GFQ.map(q=>({n:0,q:q.q,o:q.o.slice(),k:0,y:q.y,hk:0})):parseSoal($('#pt').value),ttl=raw.title;let idn=0;
+ const qs=raw.filter(q=>q.q&&q.q.trim()).filter(q=>{if(isID(q)){idn++;return false}return true});
+ if(!qs.length){r.textContent='Tidak ada soal yang terbaca. Pastikan tiap soal diawali nomor (1. 2. 3.) dan pilihan diawali A. B. C.';return}
+ const out=qs.map(q=>{let y=q.y,o=q.o;if(y!=='ur'&&o.length===0){y='ur'}else if(y!=='ur'&&o.length===1){o=[o[0],'']}
+  return{q:q.q,o:y==='ur'?[]:o,k:y==='ur'||y==='cb'?0:q.hk?Math.min(q.k,Math.max(0,o.length-1)):-1,y,p:1,ks:y==='cb'?(q.ks||[]).filter(j=>j<o.length):undefined,r:y==='ur'&&q.r?q.r:undefined}});
+ if($('#pm').value==='add'&&E.qs.length===1&&!E.qs[0].q.trim())E.qs=[];const add=$('#pm').value==='add',f=$('#pfile').files[0],base=add?E.qs.length:0;
+ E.qs=add?E.qs.concat(out):out;if(!E.t.trim()){E.t=ttl||PT_TITLE||SRC_NAME||'';$('#jd').value=E.t}draw();
+ const pg=out.filter(q=>q.y==='pg'||q.y==='dd').length,cbn=out.filter(q=>q.y==='cb').length,urn=out.filter(q=>q.y==='ur').length,rbn=out.filter(q=>q.y==='ur'&&q.r).length,nk=qs.filter((q,i)=>out[i].y!=='ur'&&!q.hk).length;
+ const chk=[];out.forEach((q,i)=>{if(q.q.includes('[gambar')||q.o.some(o=>o.includes('[gambar')||!o.trim()))chk.push(base+i+1)});
+ r.style.color='var(--ok)';
+ r.textContent=out.length+' soal masuk ('+pg+' pilihan ganda atau benar-salah, '+cbn+' kotak centang, '+urn+' uraian'+(rbn?', '+rbn+' dengan pedoman jawaban':'')+').'+(idn?' '+idn+' isian identitas (nama, kelas, ruang, dan sejenisnya) dilewati.':'')+(nk?' Kunci jawaban belum ada pada '+nk+' soal pilihan: ditandai merah "kunci belum dipilih" di editor, isi lewat kolom kunci jawaban atau pilih satu per satu.':'')+(chk.length?' Periksa dulu soal nomor '+chk.join(', ')+' di editor: ada gambar atau tulisan yang tidak terbaca ([gambar/teks tidak terbaca]), ganti dengan teks yang benar atau hapus penandanya.':'')};
+$('#lkb').onclick=readLink;
+$('#cbm').onclick=async()=>{const t=$('#bm').textContent;{const ok=await copyTxt(t);$('#cbm').textContent=ok?'Kode tersalin':'Salin manual';if(!ok)manual(t,'Kode bookmark')}setTimeout(()=>$('#cbm').textContent='Salin kode',2000)};
+$('#lk').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();readLink()}});
+{const dz=$('#drop'),inInput=e=>e.target===$('#pfile'),hasF=e=>e.dataTransfer&&[...(e.dataTransfer.types||[])].includes('Files');
+ window.addEventListener('dragover',e=>{if(inInput(e)||!hasF(e))return;e.preventDefault();dz.classList.add('on')});
+ window.addEventListener('dragleave',e=>{if(e.relatedTarget===null)dz.classList.remove('on')});
+ window.addEventListener('drop',e=>{dz.classList.remove('on');if(inInput(e))return;const f=e.dataTransfer&&e.dataTransfer.files[0];
+  if(f){e.preventDefault();curFile=f;readFile(f)}
+  else{const t=((e.dataTransfer&&(e.dataTransfer.getData('text/uri-list')||e.dataTransfer.getData('text')))||'').trim();if(/^https?:\/\/\S+$/.test(t)){e.preventDefault();$('#lk').value=t;readLink()}}});
+ document.addEventListener('paste',e=>{const f=e.clipboardData&&e.clipboardData.files&&e.clipboardData.files[0];if(f){e.preventDefault();curFile=f;readFile(f)}})}
+
+
+/* ===== hasil siswa ===== */
+let RES=[],RE=null,RID='';
+function fillRx(){
+ const a=Object.values(DR).filter(e=>e.terbit||true).sort((p,q)=>(q.mulai||0)-(p.mulai||0)),cur=$('#rx').value;
+ $('#rx').innerHTML=a.length?a.map(e=>`<option value="${e.id}" ${e.id===cur?'selected':''}>${esc(e.mapel||e.t)} (${e.mulai?fmt(e.mulai):'draf'})</option>`).join(''):'<option value="">Belum ada ujian</option>'}
+const sc=(Q,r)=>{let b=0;Q.forEach((q,i)=>{const P=q.p||1,a=r.A[i];
+ if(q.y==='ur')b+=Math.min(P,+(r.ES&&r.ES[i])||0);
+ else if(q.y==='cb'){if(Array.isArray(a)&&a.slice().sort(nm).join()===(q.ks||[]).slice().sort(nm).join())b+=P}
+ else if(a===q.k)b+=P});return b};
+const tot=Q=>Q.reduce((s,q)=>s+(q.p||1),0);
+const nilai=r=>Math.round(sc(RE.qs,r)/tot(RE.qs)*100);
+function ev(q,r,i){const a=r.A[i];
+ if(q.y==='ur'){const t=typeof a==='string'?a.trim():'';return{s:t?'ur':'bl',t,A:[]}}
+ if(q.y==='cb'){const A=Array.isArray(a)?a:[];return{s:!A.length?'bl':A.slice().sort(nm).join()===(q.ks||[]).slice().sort(nm).join()?'ok':'no',A}}
+ const has=typeof a==='number'&&a>=0&&a<q.o.length;return{s:!has?'bl':a===q.k?'ok':'no',A:has?[a]:[]}}
+function tally(r){const c={ok:0,no:0,bl:0,ur:0};RE.qs.forEach((q,i)=>{const e=ev(q,r,i);if(q.y==='ur')c.ur++;else c[e.s]++});return c}
+$('#rl').onclick=async()=>{
+ const id=$('#rx').value,m=$('#rm');if(!id){m.textContent='Pilih ujian dulu.';return}
+ RE=DR[id];RID=id;m.style.color='var(--mu)';m.textContent='Memuat hasil…';
+ try{const o=(await sb('GET','hasil','ujian_id=eq.'+encodeURIComponent(id)+'&select=*'))||[];RES=[];
+  for(const r of o){try{r.key=r.rkey;r.A=JSON.parse(r.a||'[]');r.V=JSON.parse(r.v||'[]');r.ES=r.es?JSON.parse(r.es):{};r.w=+r.w||0;RES.push(r)}catch(e){}}
+  const ks=[...new Set(RES.map(r=>r.kl))].sort();$('#rk').innerHTML='<option value="">Semua kelas</option>'+ks.map(k=>`<option>${esc(k)}</option>`).join('');
+  m.textContent=RES.length?RES.length+' siswa sudah mengumpulkan.':'Belum ada siswa yang mengumpulkan.';drawR()}
+ catch(x){m.style.color='var(--dg)';m.textContent=netErr(x)}};
+$('#rk').onchange=()=>drawR();
+const view=()=>RES.filter(r=>!$('#rk').value||r.kl===$('#rk').value).sort((a,b)=>sc(RE.qs,b)-sc(RE.qs,a));
+function qBlock(q,r,ri,i){const e=ev(q,r,i),P=q.p||1;let body,st,lab;
+ if(q.y==='ur'){st=e.s==='bl'?'bl':'ur';lab=e.s==='bl'?'Tidak dijawab':'Uraian';
+  body=`<div class="ans${e.t?'':' mu'}">${esc(e.t||'(tidak dijawab)')}</div>${q.r?`<p class="mu"><b>Rubrik:</b> ${esc(q.r)}</p>`:''}<div class="opt"><label style="margin:0" for="e${ri}_${i}">Skor (maks ${P})</label><input id="e${ri}_${i}" type="number" min="0" max="${P}" step="0.5" style="width:90px" data-r="${ri}" data-q="${i}" value="${(r.ES&&r.ES[i])||0}"></div>`}
+ else{st=e.s;lab={ok:'Benar',no:'Salah',bl:'Tidak dijawab'}[e.s];
+  body=q.o.map((o,j)=>{const mine=e.A.includes(j),key=q.y==='cb'?(q.ks||[]).includes(j):q.k===j;return `<div class="op${mine?' m':''}${key?' k':''}"><b>${L(j)}.</b><span>${esc(o)}</span>${mine?'<em class="tg '+(key?'g':'x')+'">Dipilih siswa</em>':''}${key?'<em class="tg g">Kunci</em>':''}</div>`}).join('')}
+ return `<div class="qb ${st}"><b>Soal ${i+1}</b> <em class="tg ${st==='ok'?'g':st==='no'?'x':'s-dr'}">${lab}</em><p class="qt">${esc(q.q)}</p>${body}</div>`}
+function drawR(){
+ if(!RE)return;const rows=view(),T=tot(RE.qs);
+ if(!rows.length){$('#sm').innerHTML='';$('#rs').innerHTML='';return}
+ const ns=rows.map(nilai),avg=Math.round(ns.reduce((s,n)=>s+n,0)/ns.length);
+ $('#sm').innerHTML=`<div class="card"><h2>${esc(RE.mapel||RE.t)}</h2><div class="stats"><div><b>${rows.length}</b><span>Peserta</span></div><div><b>${avg}</b><span>Rata-rata</span></div><div><b>${Math.max(...ns)}</b><span>Tertinggi</span></div><div><b>${Math.min(...ns)}</b><span>Terendah</span></div></div><div class="scroll"><table><thead><tr><th>#</th><th>Nama</th><th>Kelas</th><th>Nilai</th><th>Benar</th><th>Salah</th><th>Kosong</th><th>Pelanggaran</th><th>Durasi</th></tr></thead><tbody>${rows.map((r,n)=>{const c=tally(r),i=RES.indexOf(r);return `<tr><td>${n+1}</td><td><a href="#s${i}" data-go="${i}">${esc(r.n)}</a></td><td>${esc(r.kl)}</td><td><b>${nilai(r)}</b></td><td>${c.ok}</td><td>${c.no}</td><td>${c.bl}</td><td>${r.V.length||'–'}</td><td>${Math.floor(r.w/60)}m ${r.w%60}d</td></tr>`}).join('')}</tbody></table></div></div>`;
+ $('#rs').innerHTML=rows.map(r=>{const ri=RES.indexOf(r),c=tally(r);
+  return `<details class="st card" id="s${ri}"><summary><span class="nm">${esc(r.n)} <span class="mu" style="font-weight:500">· ${esc(r.kl)}</span></span><span style="display:flex;align-items:center;gap:12px"><span><b id="sc${ri}" style="font:700 24px 'Bricolage Grotesque'">${nilai(r)}</b> / 100</span><button type="button" class="d" data-del="${ri}" aria-label="Hapus hasil ${esc(r.n)}">Hapus</button></span></summary>
+  <p class="mu"><span id="pt${ri}">${r2(sc(RE.qs,r))} dari ${r2(T)} poin</span> · Durasi ${Math.floor(r.w/60)}m ${r.w%60}d · ${c.ok} benar, ${c.no} salah, ${c.bl} kosong${c.ur?`, ${c.ur} uraian`:''} · Dikirim ${fmt(r.t)}</p>
+  <p>Pelanggaran: ${r.V.length?`<b style="color:var(--dg)">${r.V.length}</b> `+r.V.map(v=>`<span class="tg x">${esc(v[1])} @${Math.floor(v[0]/60)}:${String(v[0]%60).padStart(2,'0')}</span>`).join(' '):'<span class="tg g">bersih</span>'}</p>
+  ${r.A.length!==RE.qs.length?'<p class="note">Jumlah soal tidak cocok dengan versi soal di editor.</p>':''}
+  ${RE.qs.map((q,i)=>qBlock(q,r,ri,i)).join('')}
+  <div class="bar"><button class="d" data-del="${ri}">Hapus hasil ini (agar siswa bisa mengulang)</button></div></details>`}).join('')}
+let svT={};
+$('#rs').addEventListener('input',e=>{const d=e.target.dataset;if(d.r===undefined)return;const r=RES[d.r];r.ES=r.ES||{};
+ r.ES[d.q]=Math.min(+e.target.max,Math.max(0,+e.target.value||0));
+ $('#sc'+d.r).textContent=nilai(r);$('#pt'+d.r).textContent=r2(sc(RE.qs,r))+' dari '+r2(tot(RE.qs))+' poin';
+ clearTimeout(svT[d.r]);svT[d.r]=setTimeout(()=>sb('PATCH','hasil','ujian_id=eq.'+encodeURIComponent(RID)+'&rkey=eq.'+encodeURIComponent(r.key),{es:JSON.stringify(r.ES)},'return=minimal').catch(()=>{$('#rm').style.color='var(--dg)';$('#rm').textContent='Skor uraian gagal tersimpan. Periksa internet.'}),700)});
+$('#rs').addEventListener('click',async e=>{const b=e.target.closest('button[data-del]');if(!b)return;e.preventDefault();e.stopPropagation();const d=b.dataset.del,r=RES[d];if(!r)return;
+ if(!confirm('Hapus hasil '+r.n+' ('+r.kl+')? Nilai dan jawabannya hilang permanen, dan siswa bisa mengerjakan ulang.'))return;
+ try{const o=await sb('DELETE','hasil','ujian_id=eq.'+encodeURIComponent(RID)+'&rkey=eq.'+encodeURIComponent(r.key),undefined,'return=representation');
+  if(!o||!o.length){alert('Tidak ada hasil yang terhapus. Muat ulang halaman lalu coba lagi.');return}
+  RES.splice(+d,1);drawR()}catch(x){alert(netErr(x))}});
+$('#dall').onclick=async()=>{if(!RID||!RES.length){alert('Belum ada hasil untuk dihapus.');return}
+ if(!confirm('Hapus SEMUA '+RES.length+' hasil siswa untuk ujian ini? Tindakan ini tidak bisa dibatalkan.'))return;
+ try{const o=await sb('DELETE','hasil','ujian_id=eq.'+encodeURIComponent(RID),undefined,'return=representation');
+  if(!o||!o.length){alert('Tidak ada hasil yang terhapus. Muat ulang halaman lalu coba lagi.');return}
+  RES=[];drawR()}catch(x){alert(netErr(x))}};
+$('#sm').addEventListener('click',e=>{const a=e.target.closest('[data-go]');if(!a)return;e.preventDefault();const d=$('#s'+a.dataset.go);d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'})});
+$('#fw').onchange=e=>$('#rs').classList.toggle('onlywrong',e.target.checked);
+$('#oa').onclick=()=>document.querySelectorAll('#rs details').forEach(d=>d.open=true);
+$('#ca').onclick=()=>document.querySelectorAll('#rs details').forEach(d=>d.open=false);
+$('#prt').onclick=()=>window.print();
+addEventListener('beforeprint',()=>document.querySelectorAll('#rs details').forEach(d=>d.open=true));
+$('#csv').onclick=()=>{if(!RE||!RES.length)return;
+ const q=s=>'"'+String(s).replace(/"/g,'""')+'"',rows=[['Nama','Kelas','Nilai','Benar','Salah','Kosong','Pelanggaran','Durasi (detik)'].map(q).join(',')];
+ view().forEach(r=>{const c=tally(r);rows.push([q(r.n),q(r.kl),nilai(r),c.ok,c.no,c.bl,r.V.length,r.w].join(','))});
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+rows.join('\n')],{type:'text/csv'}));a.download='hasil-'+(RE.mapel||'ujian').replace(/\W+/g,'-')+'.csv';document.body.appendChild(a);a.click();a.remove()};
+
+if(!checkRecovery()&&SES&&CFG.db&&CFG.key)enter();
+</script>
+</body>
+</html>

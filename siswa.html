@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ujian Terjaga: Siswa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Public+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#F3F6FA;--sf:#fff;--ink:#0F1B2D;--mu:#5B6B80;--ac:#1F4FFF;--acx:#fff;--dg:#C62828;--ok:#1B7F5C;--ln:#D5DDE8;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1320;--sf:#131D2E;--ink:#E8EEF7;--mu:#93A3B8;--ac:#7FA0FF;--acx:#0C1320;--dg:#FF7A7A;--ok:#5FD1A0;--ln:#263449;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0C1320;--sf:#131D2E;--ink:#E8EEF7;--mu:#93A3B8;--ac:#7FA0FF;--acx:#0C1320;--dg:#FF7A7A;--ok:#5FD1A0;--ln:#263449;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100%;background:#F3F6FA;background:var(--bg);color:#0F1B2D;color:var(--ink);font:400 16px/1.55 "Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:10;background:#F3F6FA;background:var(--bg)}
+h1,h2{font-family:"Bricolage Grotesque","Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.15;margin:0}
+h1{font-size:30px;font-size:clamp(28px,6vw,42px);font-weight:700;letter-spacing:-.02em}
+h2{font-size:22px;font-weight:700}
+main,.in{max-width:760px;margin:0 auto;padding:20px 16px 56px}
+p{margin:.4em 0}.mu{color:#5B6B80;color:var(--mu)}.hide{display:none!important}
+.card{background:#fff;background:var(--sf);border:1px solid #D5DDE8;border:1px solid var(--ln);border-radius:10px;padding:18px;margin:14px 0}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input,textarea,select{width:100%;font:inherit;color:#0F1B2D;color:var(--ink);background:#F3F6FA;background:var(--bg);border:1px solid #D5DDE8;border:1px solid var(--ln);border-radius:6px;padding:10px 12px}
+textarea{resize:vertical;min-height:90px}
+button{font:600 15px "Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;cursor:pointer;border-radius:6px;padding:10px 16px;border:1px solid #D5DDE8;border:1px solid var(--ln);background:#fff;background:var(--sf);color:#0F1B2D;color:var(--ink);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button.p{background:#1F4FFF;background:var(--ac);color:#fff;color:var(--acx);border-color:#1F4FFF;border-color:var(--ac)}
+button:disabled{opacity:.45;cursor:default}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #1F4FFF;outline:3px solid var(--ac);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;margin:9px -5px 0}
+.bar>*{margin:5px}
+.note{border-left:4px solid #1F4FFF;border-left:4px solid var(--ac);background:#fff;background:var(--sf);padding:10px 14px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+.err{color:#C62828;color:var(--dg);font-weight:600;min-height:1.5em}
+.ck{display:flex;align-items:flex-start;font-weight:600;margin:10px 0 0}
+.ck input{width:22px;height:22px;flex:0 0 22px;margin:1px 10px 0 0;padding:0}
+#ex{position:relative;min-height:100vh;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+#ex .in{position:relative;z-index:2;padding-top:0}
+#ex textarea,#ex select{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+.top{position:-webkit-sticky;position:sticky;top:0;top:env(safe-area-inset-top,0px);z-index:11;background:#F3F6FA;background:var(--bg);padding:10px 0;border-bottom:1px solid #D5DDE8;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.timer{font:700 26px "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums}
+.timer.low{color:#C62828;color:var(--dg)}
+.meter{display:flex;align-items:center;font-size:13px;color:#5B6B80;color:var(--mu)}
+.meter i{width:22px;height:10px;border-radius:2px;background:#D5DDE8;background:var(--ln);display:block;margin-left:4px}
+.meter i.on{background:#C62828;background:var(--dg)}
+.q{font-size:20px;margin:10px 0 14px;line-height:1.4;white-space:pre-wrap}
+.ch{display:block;width:100%;text-align:left;margin:8px 0;padding:13px 14px;font-weight:500;font-size:16px}
+.ch[aria-pressed=true]{border-color:#1F4FFF;border-color:var(--ac);box-shadow:inset 0 0 0 2px #1F4FFF;box-shadow:inset 0 0 0 2px var(--ac)}
+.nav{display:flex;flex-wrap:wrap;margin:16px -3px}
+.nav button{width:40px;padding:7px 0;margin:3px}
+.nav button.a{background:#1F4FFF;background:var(--ac);color:#fff;color:var(--acx);border-color:#1F4FFF;border-color:var(--ac)}
+.nav button.c{outline:2px solid #0F1B2D;outline:2px solid var(--ink)}
+.wm{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;pointer-events:none;overflow:hidden}
+.ov{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;background:rgba(10,15,25,.88);display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto;-webkit-overflow-scrolling:touch}
+.ov .card{max-width:440px;text-align:center}
+.ov .bar{justify-content:center}
+@media (max-width:380px){.meter i{width:14px}.timer{font-size:22px}.q{font-size:18px}main,.in{padding-left:12px;padding-right:12px}}
+</style>
+</head>
+<body>
+
+<main id="home">
+  <h1>Ujian Terjaga</h1>
+  <p class="err" id="bootmsg" role="alert">Halaman belum bisa dijalankan di browser ini. Buka lewat Chrome atau Safari versi terbaru, atau perbarui Android System WebView.</p>
+  <p class="mu">Isi nama, kelas, dan pilih mata pelajaran. Soal langsung terbuka saat jadwal ujian dimulai, tanpa kode.</p>
+  <div class="card">
+    <label for="nm">Nama lengkap</label><input id="nm" autocomplete="name">
+    <label for="kl">Kelas</label><input id="kl" list="kls" placeholder="Contoh: 9A" autocomplete="off">
+    <datalist id="kls"></datalist>
+    <label for="mp">Mata pelajaran</label><select id="mp"><option value="">Memuat daftar ujian…</option></select>
+    <p class="mu" id="lst" style="font-size:13px"></p>
+    <div class="bar"><button id="ts" type="button">Tes suara alarm</button></div>
+    <label class="ck hide" id="skl" for="sk"><input type="checkbox" id="sk"><span>Saya mendengar bunyi alarm dengan jelas</span></label>
+    <p class="mu" style="font-size:13px">Naikkan volume media sampai keras dan matikan mode senyap. Tombol Mulai aktif setelah kamu menekan Tes suara dan mencentang kotak di atas.</p>
+    <p class="err" id="er" role="alert"></p>
+    <div class="bar"><button class="p" id="go" disabled>Mulai ujian</button></div>
+  </div>
+  <div class="note hide" id="nost"><b>Penyimpanan otomatis tidak tersedia</b> di browser ini (biasanya karena file dibuka dari aplikasi lain atau mode pribadi). Tetap bisa dipakai, tetapi jangan tutup atau muat ulang halaman, karena jawabanmu tidak bisa dipulihkan.</div>
+  <div class="note"><b>Aturan ujian.</b> Ujian berjalan di layar penuh bila perangkat mendukung. Pindah tab, membuka aplikasi lain, atau keluar dari layar penuh dihitung sebagai pelanggaran, dicatat untuk guru, dan alarm berbunyi keras sampai kamu menekan "Lanjutkan ujian". Bila batas pelanggaran tercapai atau waktu habis, jawabanmu otomatis dikumpulkan. Jangan muat ulang halaman saat ujian berjalan, karena itu juga dicatat. Atur waktu layar mati ke yang paling lama dan jangan kunci layar: layar yang mati dihitung sebagai pindah tab.</div>
+</main>
+
+<div id="ex" class="hide">
+  <div class="wm" id="wm" aria-hidden="true"></div>
+  <div class="in">
+    <div class="top">
+      <div><div class="timer" id="tm" aria-label="Sisa waktu">00:00</div><div class="mu" id="tt" style="font-size:13px"></div></div>
+      <div class="meter" id="mt" aria-label="Pelanggaran"></div>
+    </div>
+    <div id="qa"></div>
+    <div class="bar"><button id="pv">Sebelumnya</button><button id="nx">Berikutnya</button><button class="p" id="sb" style="margin-left:auto">Kumpulkan</button></div>
+    <div class="nav" id="nv" role="group" aria-label="Daftar soal"></div>
+  </div>
+</div>
+
+<main id="done" class="hide">
+  <h1>Ujian dikumpulkan</h1>
+  <p class="mu" id="ds"></p>
+  <div class="card">
+    <h2>Status pengiriman</h2>
+    <p id="sd" role="status" style="font-weight:600"></p>
+    <div class="bar"><button class="p hide" id="rt">Kirim ulang</button><button id="bk">Kembali ke awal</button></div>
+  </div>
+  <div class="note">Jawabanmu dikirim otomatis ke guru. Nilai tidak ditampilkan di sini. Jangan tutup halaman sampai status berubah menjadi terkirim.</div>
+</main>
+
+<div id="warn" class="ov hide" role="alertdialog" aria-modal="true" aria-labelledby="wh">
+  <div class="card"><h2 id="wh">Pelanggaran tercatat</h2><p id="wt"></p><div class="bar"><button class="p" id="wok">Lanjutkan ujian</button></div></div>
+</div>
+<div id="cf" class="ov hide" role="alertdialog" aria-modal="true" aria-labelledby="ch2">
+  <div class="card"><h2 id="ch2">Kumpulkan jawaban?</h2><p id="ct"></p><div class="bar"><button id="cn">Kembali</button><button class="p" id="cy">Ya, kumpulkan</button></div></div>
+</div>
+
+<script>
+/* ===== PENGATURAN SUPABASE (lihat PANDUAN_SUPABASE.md) ===== */
+var DB_URL="https://tyhrklztxegbqajkbisn.supabase.co";
+var DB_KEY="sb_publishable_Xp8nGxVeDN0bvJHIRaoRxQ_Cf4gDXjT";   /* isi dengan Publishable key (sb_publishable_...). JANGAN pakai secret key. */
+/* ================================================================================================ */
+var bm=document.getElementById("bootmsg");if(bm)bm.style.display="none";
+var DB=String(DB_URL).replace(/\/+$/,"");
+var $=function(s){return document.querySelector(s)};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var pad=function(n){return (n<10?"0":"")+n};
+var hc=function(e,c){return(" "+e.className+" ").indexOf(" "+c+" ")>=0};
+var tg=function(e,c,on){var h=hc(e,c);if(on&&!h)e.className=(e.className?e.className+" ":"")+c;else if(!on&&h)e.className=(" "+e.className+" ").replace(" "+c+" "," ").replace(/^\s+|\s+$/g,"")};
+var up=function(e,a){while(e&&e!==document){if(e.nodeType===1&&e.hasAttribute&&e.hasAttribute(a))return e;e=e.parentNode}return null};
+var nrm=function(s){return String(s||"").toLowerCase().replace(/\s+/g,"")};
+var hash=function(s){var h=0,i;for(i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return (h>>>0).toString(36)};
+
+var X,S,LIST=[],OFF=0,cur=0,tick,last=0,fs=false,on=false,svT=0,E=null;
+var nowMs=function(){return Date.now()+OFF};
+var key=function(id,kl,n){return "uj"+hash(id+"|"+nrm(kl)+"|"+n.toLowerCase().replace(/\s+/g," "))};
+var rkey=function(id,kl,n){var s=(nrm(kl)+"-"+n.toLowerCase().replace(/\s+/g,"-")).replace(/[^a-z0-9-]/g,"");return s.slice(0,40)+"-"+hash(id+"|"+nrm(kl)+"|"+n.toLowerCase().replace(/\s+/g," "))};
+var ld=function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+var sv=function(){clearTimeout(svT);try{localStorage.setItem(S.k,JSON.stringify(S))}catch(e){}};
+var svd=function(){clearTimeout(svT);svT=setTimeout(sv,400)};
+var el=function(){return Math.max(0,Math.floor((Date.now()-S.st)/1000))};
+var show=function(id){["home","ex","done"].forEach(function(x){tg($("#"+x),"hide",x!==id)});try{window.scrollTo(0,0)}catch(e){}};
+var isA=function(i){var q=X.q[i],a=S.a[i];return q.y==="ur"?!!String(a||"").trim():q.y==="cb"?a.length>0:typeof a==="number"};
+var fmt=function(ms){try{return new Date(ms).toLocaleString("id-ID",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}catch(e){return new Date(ms).toString()}};
+
+/* ===== komunikasi dengan database ===== */
+function api(path){
+  return fetch(DB+"/rest/v1/"+path,{cache:"no-store",headers:{apikey:DB_KEY}}).then(function(r){
+    if(!r.ok){var x=new Error("HTTP "+r.status);x.st=r.status;throw x}
+    return r.json()})
+}
+function syncTime(){
+  try{fetch(DB+"/rest/v1/rpc/waktu_server",{method:"POST",headers:{apikey:DB_KEY,"content-type":"application/json"},body:"{}"}).then(function(r){return r.json()}).then(function(t){if(typeof t==="number"&&t>0){OFF=t-Date.now();renderList()}},function(){})}catch(e){}
+}
+function loadList(){
+  if(!DB||!DB_KEY){$("#er").textContent="Aplikasi belum dihubungkan ke database. Hubungi guru.";return}
+  syncTime();api("daftar?select=*&order=mulai.asc").then(function(o){
+    LIST=[];for(var k in (o||{}))if(o[k]&&o[k].mulai){if(o[k].id==null)o[k].id=k;LIST.push(o[k])}
+    LIST.sort(function(a,b){return a.mulai-b.mulai});renderList()
+  },function(){$("#lst").textContent="Daftar ujian belum bisa dimuat. Periksa koneksi internet, lalu coba lagi.";$("#mp").innerHTML='<option value="">Daftar tidak tersedia</option>'});
+}
+function renderList(){
+  var kl=nrm($("#kl").value),sel=$("#mp").value,now=nowMs(),h='<option value="">Pilih mata pelajaran</option>',n=0,ks={},kd="";
+  LIST.forEach(function(e){(e.kelas||"").split(",").forEach(function(c){c=c.trim();if(c)ks[c]=1})});
+  for(var c in ks)kd+='<option value="'+esc(c)+'">';$("#kls").innerHTML=kd;
+  LIST.forEach(function(e){
+    if(e.selesai<=now)return;
+    if(e.kelas&&kl&&e.kelas.split(",").map(nrm).indexOf(kl)<0)return;
+    var open=e.mulai<=now;n++;
+    h+='<option value="'+esc(e.id)+'"'+(open?"":" disabled")+(e.id===sel?" selected":"")+">"+esc(e.mapel||e.judul)+(open?" (dibuka, sampai "+fmt(e.selesai)+")":" (dibuka "+fmt(e.mulai)+")")+"</option>"});
+  if(!n)h='<option value="">Belum ada ujian yang tersedia untuk kelas ini</option>';
+  $("#mp").innerHTML=h;
+  $("#lst").textContent=n?"Pelajaran yang belum dibuka akan aktif otomatis pada jam yang tertera.":"";
+}
+$("#kl").oninput=renderList;
+setInterval(function(){if(!on&&!$("#home").className.match(/hide/))renderList()},15000);
+setInterval(function(){if(!on)loadList()},60000);
+
+/* ===== pengiriman hasil (dicoba ulang otomatis sampai berhasil) ===== */
+function pendGet(){return ld("uj_pend")||[]}
+function pendSet(a){try{localStorage.setItem("uj_pend",JSON.stringify(a))}catch(e){}}
+function pendAdd(k){var a=pendGet();if(a.indexOf(k)<0){a.push(k);pendSet(a)}}
+function pendDel(k){pendSet(pendGet().filter(function(x){return x!==k}))}
+function sendState(st,cb){
+  var body=JSON.stringify({ujian_id:st.id,rkey:st.rk,n:st.n,kl:st.kl,w:st.w,t:Date.now(),a:JSON.stringify(st.a),v:JSON.stringify(st.v)});
+  fetch(DB+"/rest/v1/hasil",{method:"POST",headers:{apikey:DB_KEY,"content-type":"application/json",Prefer:"return=minimal"},body:body}).then(function(r){return r.ok?1:r.status===409?2:0},function(){return 0}).then(cb)
+}
+var retryT=0;
+function trySend(st){
+  if(!st||!st.done||st.sent)return;
+  sendState(st,function(res){
+    if(res){st.sent=res;try{localStorage.setItem(st.k,JSON.stringify(st))}catch(e){}pendDel(st.k)}
+    if(S&&S.k===st.k)sentUi();
+    if(!res){clearTimeout(retryT);retryT=setTimeout(function(){trySend(st)},6000)}
+  });
+}
+function sentUi(){
+  var m=$("#sd"),b=$("#rt");
+  if(S.sent===1){m.style.color="var(--ok)";m.textContent="Terkirim ke guru. Terima kasih, ujianmu sudah selesai.";tg(b,"hide",true)}
+  else if(S.sent===2){m.style.color="var(--ok)";m.textContent="Jawaban untuk ujian ini sudah pernah tercatat oleh guru.";tg(b,"hide",true)}
+  else{m.style.color="var(--dg)";m.textContent="Belum terkirim. Dicoba lagi otomatis. Pastikan internet aktif dan jangan tutup halaman.";tg(b,"hide",false)}
+}
+$("#rt").onclick=function(){$("#sd").textContent="Mengirim…";trySend(S)};
+$("#bk").onclick=function(){S=null;X=null;show("home");loadList()};
+
+/* ===== alarm ===== */
+var AU=null,AC=null,WB=null,acF=0,ringing=false,rt=0,rw=0,WL=null;
+function wavData(){var s="",i,n=WB.length;for(i=0;i<n;i+=4096)s+=String.fromCharCode.apply(null,WB.subarray(i,i+4096));return "data:audio/wav;base64,"+btoa(s)}
+function mkWav(){
+  var R=11025,N=Math.round(R*1.2),b=new ArrayBuffer(44+N*2),v=new DataView(b),i,ph=0;
+  function W(o,s){for(var k=0;k<s.length;k++)v.setUint8(o+k,s.charCodeAt(k))}
+  W(0,"RIFF");v.setUint32(4,36+N*2,true);W(8,"WAVE");W(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,R,true);v.setUint32(28,R*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);W(36,"data");v.setUint32(40,N*2,true);
+  for(i=0;i<N;i++){var t=i/R,x=0;if(t<0.8){ph+=(Math.floor(t/0.1)%2?1175:880)/R;x=(ph%1)<0.5?0.98:-0.98}v.setInt16(44+i*2,Math.round(x*32767),true)}
+  WB=new Uint8Array(b);
+  try{return URL.createObjectURL(new Blob([b],{type:"audio/wav"}))}catch(e){return wavData()}
+}
+function audioInit(){
+  if(!AU){
+    try{AU=new Audio(mkWav());AU.loop=true;AU.preload="auto";AU.setAttribute("playsinline","");AU.setAttribute("webkit-playsinline","");
+      AU.onerror=function(){try{if(!AU._d&&WB){AU._d=1;AU.src=wavData();AU.load()}}catch(e){}}}
+    catch(e){AU=null}
+  }
+  if(AU&&!ringing){try{AU.muted=true;var p=AU.play();
+      var done=function(){if(!ringing){try{AU.pause();AU.currentTime=0}catch(e){}}AU.muted=false};
+      if(p&&p.then)p.then(done,function(){AU.muted=false});else done()}catch(e){try{AU.muted=false}catch(x){}}}
+  try{var C=window.AudioContext||window.webkitAudioContext;if(C&&!AC)AC=new C();if(AC&&AC.state==="suspended"&&AC.resume)AC.resume()}catch(e){AC=null}
+}
+function beep(){
+  try{if(!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;
+    try{o.type="square"}catch(x){}
+    o.frequency.value=(acF++%2)?1175:880;g.gain.value=0.9;o.connect(g);g.connect(AC.destination);
+    if(o.start)o.start(t);else o.noteOn(t);
+    if(o.stop)o.stop(t+0.3);else o.noteOff(t+0.3)}catch(e){}
+}
+function ringStop(){
+  ringing=false;clearTimeout(rt);clearInterval(rw);
+  try{if(AU){AU.pause();AU.currentTime=0}}catch(e){}
+  try{if(navigator.vibrate)navigator.vibrate(0)}catch(e){}
+}
+function ringStart(sec){
+  clearTimeout(rt);clearInterval(rw);ringing=true;
+  var go=function(){var ok=false;
+    try{if(AU){AU.muted=false;AU.volume=1;if(AU.paused){var p=AU.play();if(p&&p.catch)p.catch(function(){})}}ok=!!AU&&!AU.paused&&!AU.error}catch(e){}
+    if(!ok){try{if(AC&&AC.state==="suspended"&&AC.resume)AC.resume()}catch(e){}beep()}};
+  try{if(AU)AU.currentTime=0}catch(e){}
+  go();rw=setInterval(go,400);rt=setTimeout(ringStop,sec*1000);
+  try{if(navigator.vibrate)navigator.vibrate([400,200,400,200,400,200,400])}catch(e){}
+}
+function wake(){try{if(navigator.wakeLock&&on&&!(document.hidden||document.webkitHidden)&&!WL){navigator.wakeLock.request("screen").then(function(l){WL=l;try{l.addEventListener("release",function(){WL=null})}catch(e){}},function(){})}}catch(e){}}
+function unwake(){try{if(WL){WL.release();WL=null}}catch(e){}}
+
+$("#ts").onclick=function(){
+  audioInit();
+  setTimeout(function(){ringStart(2.5)},60);
+  tg($("#skl"),"hide",false);
+  $("#er").textContent="Alarm berbunyi sebentar. Jika tidak terdengar, naikkan volume media atau matikan mode senyap, lalu tes lagi.";
+};
+var skf=function(){$("#go").disabled=!$("#sk").checked};$("#sk").onchange=skf;$("#sk").onclick=skf;
+
+/* ===== mulai ujian ===== */
+$("#go").onclick=function(){
+  audioInit();
+  var n=$("#nm").value.trim(),kl=$("#kl").value.trim(),id=$("#mp").value,er=$("#er");er.textContent="";
+  if(!DB||!DB_KEY){er.textContent="Aplikasi belum dihubungkan ke database. Hubungi guru.";return}
+  if(!$("#sk").checked){er.textContent="Tekan Tes suara alarm dulu, lalu centang bahwa alarm terdengar.";return}
+  if(!n){er.textContent="Isi nama lengkap dulu.";return}
+  if(!kl){er.textContent="Isi kelas dulu.";return}
+  var e=null;LIST.forEach(function(x){if(x.id===id)e=x});
+  if(!e){er.textContent="Pilih mata pelajaran dulu.";return}
+  if(e.kelas&&e.kelas.split(",").map(nrm).indexOf(nrm(kl))<0){er.textContent="Ujian ini bukan untuk kelas "+kl+".";return}
+  var now=nowMs();
+  if(now<e.mulai){er.textContent="Ujian ini baru dibuka "+fmt(e.mulai)+".";return}
+  if(now>=e.selesai){er.textContent="Waktu ujian ini sudah berakhir.";loadList();return}
+  var k=key(id,kl,n),old=ld(k);
+  if(old&&old.done&&old.sent){S=old;E=e;X={q:[],m:e.durasi,x:e.maks};showDone(true);return}
+  $("#go").disabled=true;er.textContent="Mengambil soal…";
+  api("soal?id=eq."+encodeURIComponent(id)+"&select=j").then(function(rows){var s=rows&&rows[0];
+    $("#go").disabled=false;er.textContent="";
+    if(!s||!s.j){er.textContent="Ujian ini belum dibuka atau soal belum tersedia. Coba lagi sebentar.";return}
+    var qs;try{qs=JSON.parse(s.j)}catch(x){er.textContent="Soal rusak. Hubungi guru.";return}
+    E=e;X={q:qs,m:e.durasi,x:e.maks,end:e.selesai,id:id};
+    try{localStorage.setItem("uj_last",JSON.stringify({n:n,kl:kl,id:id}))}catch(x){}
+    if(old){S=old;if(!S.done){S.v.push([el(),"Muat ulang halaman"]);sv()}}
+    else{S={k:k,id:id,rk:rkey(id,kl,n),n:n,kl:kl,st:Date.now(),a:qs.map(function(q){return q.y==="cb"?[]:q.y==="ur"?"":null}),v:[],done:false,sent:0};sv()}
+    if(S.done){showDone();trySend(S);return}
+    startExam();
+  },function(x){
+    $("#go").disabled=false;
+    er.textContent=(x&&(x.st===401||x.st===403))?"Ujian ini belum dibuka. Tunggu sampai jam mulai lalu coba lagi.":"Gagal mengambil soal. Periksa internet lalu coba lagi."});
+};
+function wmBg(name){
+  var w=Math.min(520,Math.max(200,name.length*11+60)),h=Math.round(name.length*5+70);
+  var svg="<svg xmlns='http://www.w3.org/2000/svg' width='"+w+"' height='"+h+"'><text x='"+w/2+"' y='"+h/2+"' text-anchor='middle' transform='rotate(-24 "+w/2+" "+h/2+")' font-family='sans-serif' font-weight='700' font-size='18' fill='#808080' fill-opacity='0.16'>"+esc(name).replace(/'/g,"&#39;")+"</text></svg>";
+  return 'url("data:image/svg+xml,'+encodeURIComponent(svg)+'")';
+}
+function startExam(){
+  on=true;cur=0;
+  $("#wm").style.backgroundImage=wmBg(S.n+" "+S.kl);
+  $("#tt").textContent=E.mapel||E.judul||"";
+  show("ex");reqFS();wake();meter();draw();clock();
+  clearInterval(tick);tick=setInterval(clock,1000);
+  if(S.v.length>=X.x)finish();
+}
+function reqFS(){try{var e=document.documentElement,f=e.requestFullscreen||e.webkitRequestFullscreen;if(f){var p=f.call(e);if(p&&p.catch)p.catch(function(){})}}catch(x){}}
+function clock(){
+  var r=Math.min(X.m*60-el(),X.end?Math.floor((X.end-nowMs())/1000):1e9);if(r<=0){finish();return}
+  var h=Math.floor(r/3600),m=Math.floor(r%3600/60),s=r%60,t=$("#tm");
+  t.textContent=(h?h+":"+pad(m):pad(m))+":"+pad(s);tg(t,"low",r<=60);
+}
+function meter(){var h="Pelanggaran ",i;for(i=0;i<X.x;i++)h+='<i class="'+(i<S.v.length?"on":"")+'"></i>';$("#mt").innerHTML=h}
+function viol(l){
+  if(!on||!S||S.done)return;var t=Date.now();if(t-last<1500)return;last=t;
+  S.v.push([el(),l]);sv();meter();
+  if(S.v.length>=X.x){finish();return}
+  $("#wt").textContent="Pelanggaran "+S.v.length+" dari "+X.x+": "+l+". Pada "+X.x+" pelanggaran, jawabanmu otomatis dikumpulkan.";
+  tg($("#warn"),"hide",false);
+  try{$("#wok").focus()}catch(e){}
+  ringStart(30);
+}
+function vc(){if(document.hidden||document.webkitHidden){if(S&&!S.done)sv();viol("Pindah tab")}else wake()}
+document.addEventListener("visibilitychange",vc);
+document.addEventListener("webkitvisibilitychange",vc);
+addEventListener("blur",function(){var a=document.activeElement;if(a&&a.tagName==="SELECT")return;viol("Keluar jendela")});
+addEventListener("pagehide",function(){if(S&&!S.done)sv()});
+function fsChange(){if(document.fullscreenElement||document.webkitFullscreenElement)fs=true;else if(fs){fs=false;viol("Keluar layar penuh")}}
+document.addEventListener("fullscreenchange",fsChange);
+document.addEventListener("webkitfullscreenchange",fsChange);
+["copy","cut","contextmenu"].forEach(function(e){document.addEventListener(e,function(ev){if(on)ev.preventDefault()})});
+document.addEventListener("paste",function(ev){if(on)ev.preventDefault()});
+addEventListener("beforeunload",function(ev){if(on){ev.preventDefault();ev.returnValue=""}});
+$("#wok").onclick=function(){ringStop();tg($("#warn"),"hide",true);reqFS()};
+
+function draw(){
+  var q=X.q[cur],a=S.a[cur],o=q.o||[],L=function(j){return "ABCDEFGHIJ".charAt(j)||(j+1)};
+  var h='<p class="mu" style="margin-top:14px">Soal '+(cur+1)+" dari "+X.q.length+(q.p&&q.p!==1?" · bobot "+q.p:"")+'</p><p class="q">'+esc(q.q)+"</p>";
+  if(q.y==="ur")h+='<textarea id="ua" style="min-height:180px" aria-label="Jawaban uraian" placeholder="Tulis jawabanmu di sini">'+esc(a)+"</textarea>";
+  else if(q.y==="dd")h+='<select id="us" aria-label="Pilih jawaban"><option value="">Pilih jawaban</option>'+o.map(function(t,j){return '<option value="'+j+'"'+(a===j?" selected":"")+">"+esc(t)+"</option>"}).join("")+"</select>";
+  else{if(q.y==="cb")h+='<p class="mu">Boleh memilih lebih dari satu.</p>';
+    h+=o.map(function(t,j){return '<button class="ch" data-j="'+j+'" aria-pressed="'+(q.y==="cb"?a.indexOf(j)>=0:a===j)+'">'+L(j)+". "+esc(t)+"</button>"}).join("")}
+  $("#qa").innerHTML=h;
+  $("#pv").disabled=cur===0;$("#nx").disabled=cur===X.q.length-1;
+  navDraw();
+}
+function navDraw(){$("#nv").innerHTML=X.q.map(function(_,i){return '<button data-i="'+i+'" class="'+(isA(i)?"a":"")+(i===cur?" c":"")+'" aria-label="Soal '+(i+1)+(isA(i)?", sudah dijawab":"")+'">'+(i+1)+"</button>"}).join("")}
+$("#qa").addEventListener("click",function(e){
+  var b=up(e.target,"data-j");if(!b)return;var j=+b.getAttribute("data-j"),q=X.q[cur];
+  if(q.y==="cb"){var a=S.a[cur],x=a.indexOf(j);if(x<0)a.push(j);else a.splice(x,1);a.sort(function(p,r){return p-r})}else S.a[cur]=j;
+  sv();draw();
+});
+$("#qa").addEventListener("input",function(e){
+  var was=isA(cur);
+  if(e.target.id==="ua")S.a[cur]=e.target.value;
+  else if(e.target.id==="us")S.a[cur]=e.target.value===""?null:+e.target.value;
+  else return;
+  svd();if(was!==isA(cur))navDraw();
+});
+$("#nv").addEventListener("click",function(e){var b=up(e.target,"data-i");if(b){cur=+b.getAttribute("data-i");draw();top0()}});
+var top0=function(){try{window.scrollTo(0,0)}catch(e){}};
+$("#pv").onclick=function(){if(cur>0){cur--;draw();top0()}};
+$("#nx").onclick=function(){if(cur<X.q.length-1){cur++;draw();top0()}};
+$("#sb").onclick=function(){
+  var k=X.q.filter(function(_,i){return !isA(i)}).length;
+  $("#ct").textContent=k?k+" soal belum dijawab. Setelah dikumpulkan, jawaban tidak bisa diubah.":"Semua soal sudah dijawab. Setelah dikumpulkan, jawaban tidak bisa diubah.";
+  tg($("#cf"),"hide",false);
+  try{$("#cy").focus()}catch(e){}
+};
+$("#cn").onclick=function(){tg($("#cf"),"hide",true)};
+$("#cy").onclick=function(){finish()};
+
+function finish(){
+  if(!S||S.done)return;
+  on=false;ringStop();unwake();try{localStorage.removeItem("uj_last")}catch(e){}clearInterval(tick);S.done=true;S.w=Math.min(el(),X.m*60);S.sent=0;sv();pendAdd(S.k);
+  try{if(document.fullscreenElement)document.exitFullscreen();else if(document.webkitFullscreenElement)document.webkitExitFullscreen()}catch(e){}
+  tg($("#warn"),"hide",true);tg($("#cf"),"hide",true);
+  showDone();trySend(S);
+}
+function showDone(simple){
+  var n=0;
+  if(!simple)n=X.q.filter(function(_,i){return isA(i)}).length;
+  $("#ds").textContent=S.n+" ("+S.kl+"), "+(E&&(E.mapel||E.judul)||"")+(simple?". Ujian ini sudah kamu kumpulkan.":": menjawab "+n+" dari "+X.q.length+" soal. Pelanggaran tercatat: "+S.v.length+".");
+  sentUi();show("done");
+}
+
+/* awal */
+try{localStorage.setItem("uj_t","1");localStorage.removeItem("uj_t")}catch(e){tg($("#nost"),"hide",false)}
+try{var lp=ld("uj_last");if(lp){$("#nm").value=lp.n||"";$("#kl").value=lp.kl||"";$("#er").textContent="Ujian sebelumnya belum selesai. Tes suara alarm, pilih pelajaran yang sama, lalu tekan Mulai ujian untuk melanjutkan."}}catch(e){}
+/* kirim ulang hasil yang belum terkirim dari sesi sebelumnya */
+(function(){pendGet().forEach(function(k){var st=ld(k);if(st&&st.done&&!st.sent)trySend(st);else pendDel(k)})})();
+window.onerror=function(){if(!on){var e=document.getElementById("er");if(e&&!e.textContent)e.textContent="Terjadi kesalahan di browser ini. Muat ulang halaman atau pakai Chrome terbaru."}return false};
+loadList();
+</script>
+</body>
+</html>
