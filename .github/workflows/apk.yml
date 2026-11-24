@@ -1,0 +1,184 @@
+name: Bangun APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - { id: siswa, nama: "Ujian Terjaga Siswa", paket: "id.sch.ujianterjaga.siswa", warna: "1B7F5C", aman: "true" }
+          - { id: guru,  nama: "Ujian Terjaga Guru",  paket: "id.sch.ujianterjaga.guru",  warna: "1F4FFF", aman: "false" }
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Siapkan halaman web
+        run: |
+          mkdir -p web
+          cp ${{ matrix.app.id }}.html web/index.html
+
+      - name: Pasang Capacitor dan buat proyek Android
+        run: |
+          npm init -y
+          npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+          cat > capacitor.config.json <<JSON
+          {
+            "appId": "${{ matrix.app.paket }}",
+            "appName": "${{ matrix.app.nama }}",
+            "webDir": "web",
+            "server": { "androidScheme": "https" }
+          }
+          JSON
+          npx cap add android
+          npx cap sync android
+          cp -r android android-polos
+
+      - name: Percantik (ikon, layar pembuka, layar penuh, anti tangkap layar)
+        env:
+          WARNA: ${{ matrix.app.warna }}
+          AMAN: ${{ matrix.app.aman }}
+          PAKET: ${{ matrix.app.paket }}
+        run: |
+          pip install pillow
+          python3 - <<'PY'
+          import os, glob
+          from PIL import Image, ImageDraw
+
+          warna = os.environ['WARNA']
+          col = '#' + warna
+          res = 'android/app/src/main/res'
+
+          def gambar(ukuran, bg=None, skala=1.0):
+              S = 1024
+              im = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+              d = ImageDraw.Draw(im)
+              if bg == 'kotak':
+                  d.rounded_rectangle([0, 0, S - 1, S - 1], radius=230, fill=col)
+              elif bg == 'bulat':
+                  d.ellipse([0, 0, S - 1, S - 1], fill=col)
+              T = lambda x, y: (512 + (x - 512) * skala, 512 + (y - 512) * skala)
+              perisai = [(512, 190), (760, 280), (760, 500), (700, 650), (512, 810), (324, 650), (264, 500), (264, 280)]
+              d.polygon([T(*p) for p in perisai], fill='white')
+              cek = [T(410, 510), T(490, 590), T(620, 430)]
+              d.line(cek, fill=col, width=int(56 * skala), joint='curve')
+              for x, y in (cek[0], cek[-1]):
+                  r = 28 * skala
+                  d.ellipse([x - r, y - r, x + r, y + r], fill=col)
+              return im.resize((ukuran, ukuran), Image.LANCZOS)
+
+          kepadatan = {'mdpi': (48, 108), 'hdpi': (72, 162), 'xhdpi': (96, 216), 'xxhdpi': (144, 324), 'xxxhdpi': (192, 432)}
+          for nama, (kecil, besar) in kepadatan.items():
+              d = res + '/mipmap-' + nama
+              if os.path.isdir(d):
+                  gambar(kecil, 'kotak', 0.82).save(d + '/ic_launcher.png')
+                  gambar(kecil, 'bulat', 0.74).save(d + '/ic_launcher_round.png')
+                  gambar(besar, None, 0.60).save(d + '/ic_launcher_foreground.png')
+
+          os.makedirs(res + '/values', exist_ok=True)
+          open(res + '/values/ic_launcher_background.xml', 'w').write(
+              '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <color name="ic_launcher_background">' + col + '</color>\n</resources>\n')
+
+          for f in glob.glob(res + '/drawable*/splash.png'):
+              w, h = Image.open(f).size
+              latar = Image.new('RGB', (w, h), col)
+              logo = gambar(max(64, min(w, h) // 3), None, 1.0)
+              latar.paste(logo, ((w - logo.size[0]) // 2, (h - logo.size[1]) // 2), logo)
+              latar.save(f)
+
+          paket = os.environ['PAKET']
+          aman = 'true' if os.environ['AMAN'] == 'true' else 'false'
+          jalur = 'android/app/src/main/java/' + paket.replace('.', '/') + '/MainActivity.java'
+          kode = """package __PAKET__;
+
+          import android.os.Bundle;
+          import android.view.Window;
+          import android.view.WindowManager;
+          import androidx.core.view.WindowCompat;
+          import androidx.core.view.WindowInsetsCompat;
+          import androidx.core.view.WindowInsetsControllerCompat;
+          import com.getcapacitor.BridgeActivity;
+
+          public class MainActivity extends BridgeActivity {
+              @Override
+              public void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+                  getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                  if (__AMAN__) {
+                      getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                  }
+              }
+
+              @Override
+              public void onWindowFocusChanged(boolean hasFocus) {
+                  super.onWindowFocusChanged(hasFocus);
+                  if (hasFocus && __AMAN__) {
+                      Window w = getWindow();
+                      WindowInsetsControllerCompat c = WindowCompat.getInsetsController(w, w.getDecorView());
+                      c.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                      c.hide(WindowInsetsCompat.Type.systemBars());
+                  }
+              }
+          }
+          """
+          if os.path.exists(jalur):
+              open(jalur, 'w').write(kode.replace('__PAKET__', paket).replace('__AMAN__', aman))
+          PY
+
+      - name: Bangun APK
+        working-directory: android
+        run: |
+          if ! ./gradlew assembleDebug --no-daemon; then
+            echo "Tampilan kustom gagal dibangun, memakai tampilan standar."
+            cd ..
+            rm -rf android
+            mv android-polos android
+            cd android
+            ./gradlew assembleDebug --no-daemon
+          fi
+
+      - name: Beri nama APK
+        run: |
+          mkdir -p hasil
+          cp android/app/build/outputs/apk/debug/app-debug.apk "hasil/Ujian-Terjaga-${{ matrix.app.id }}.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk-${{ matrix.app.id }}
+          path: hasil/*.apk
+          if-no-files-found: error
+
+  rilis:
+    needs: apk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: hasil
+          pattern: apk-*
+          merge-multiple: true
+
+      - name: Terbitkan APK di halaman Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "apk-${{ github.run_number }}" hasil/*.apk \
+            --repo "${{ github.repository }}" \
+            --title "APK nomor ${{ github.run_number }}" \
+            --notes "Ujian-Terjaga-Siswa.apk untuk siswa, Ujian-Terjaga-Guru.apk untuk guru."
